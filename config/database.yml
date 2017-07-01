@@ -1,0 +1,9 @@
+default: &default
+  adapter: postgresql
+  encoding: UTF8
+  database: litenodes
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  prepared_statements: false
+
+development:
+  <<: *default
