@@ -7,3 +7,8 @@ default: &default
 
 development:
   <<: *default
+  url: <%= ENV.fetch("DATABASE_URL_MASTER") %>
+
+production:
+  <<: *default
+  url: <%= ENV.fetch("DATABASE_URL_MASTER") %>

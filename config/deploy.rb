@@ -3,7 +3,7 @@ lock "3.8.2"
 
 set :application, "litenodes"
 set :repo_url, "git@github.com:rromanchuk/litenodes.git"
-
+set :branch,        :master
 
 # rbenv
 set :rbenv_type, :user
