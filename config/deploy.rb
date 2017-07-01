@@ -2,7 +2,7 @@
 lock "3.8.2"
 
 set :application, "litenodes"
-set :repo_url, "git@github.com/rromanchuk/litenodes.git"
+set :repo_url, "git@github.com:rromanchuk/litenodes.git"
 
 
 # rbenv
@@ -16,6 +16,9 @@ set :rbenv_roles, :all # default value
 
 # Default branch is :master
 ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
+
+
+set :default_env, rails_env: "production"
 
 # Default deploy_to directory is /var/www/my_app_name
 # set :deploy_to, "/var/www/my_app_name"
@@ -32,6 +35,9 @@ ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
 
 # Default value for :linked_files is []
 # append :linked_files, "config/database.yml", "config/secrets.yml"
+set :linked_files, fetch(:linked_files, []).push('.env', 'config/secrets.yml')
+set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'public/system')
+
 
 # Default value for linked_dirs is []
 # append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "public/system"
