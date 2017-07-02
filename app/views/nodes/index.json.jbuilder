@@ -1,0 +1,1 @@
+json.array! @nodes, :id, :height
