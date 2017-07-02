@@ -1,0 +1,1 @@
+json.partial! 'shared_json/node/show', node: @node
