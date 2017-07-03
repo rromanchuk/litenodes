@@ -1,0 +1,22 @@
+table.table.table-striped
+  thead
+    tr
+      th Address
+      th Port
+      th Version
+      th User Agent
+      th Services
+      th Height
+      th Timestamp
+      th Hostname
+  tbody
+    - @nodes.each do |node|
+      tr
+        td = node.ip.to_s
+        td = node.port
+        td = node.version
+        td = node.user_agent
+        td = node.services
+        td = node.height
+        td = node.timestamp
+        td = node.hostname
