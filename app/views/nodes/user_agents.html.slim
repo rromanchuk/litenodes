@@ -1,0 +1,12 @@
+table.table.table-striped
+  thead
+    tr
+      th User Agent
+      th Count
+  tbody
+    - @user_agents.each do |agent, count|
+      tr
+        td = agent
+        td = count
+
+
