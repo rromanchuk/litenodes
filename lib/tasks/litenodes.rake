@@ -24,7 +24,6 @@ namespace :litenodes do
       # end
 
 
-      sleep 1
     end
   end
 
