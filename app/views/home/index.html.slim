@@ -1,0 +1,27 @@
+javascript:
+  var map;
+  function initMap() {
+    map = new google.maps.Map(document.getElementById('map'), {
+      center: {lat: -34.397, lng: 150.644},
+      zoom: 8
+    });
+  }
+.row
+  .col-md-4.col-lg-3
+    h1 = "#{@all_nodes} NODES"
+    p Top 10 countries with their respective number of reachable nodes are as follow.
+    table.table.table-condensed
+      tbody
+        tr
+          th RANK
+          th COUNTRY
+          th NODES
+        - rank = 0
+        - @countries.each do |country, count|
+          - rank += 1
+          tr
+            td.text-center = rank
+            td.text-center = country
+            td.text-center = "#{count} (#{number_to_percentage(count/@all_nodes.to_f)})"
+  .col-md-8.col-lg-9
+    #map
