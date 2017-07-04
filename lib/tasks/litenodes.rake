@@ -28,6 +28,13 @@ namespace :litenodes do
   end
 
   task listen_for_export: :environment do
+    NODE_NONE = 0
+    NODE_NETWORK = 1 << 0
+    NODE_GETUTXO = 1 << 1
+    NODE_BLOOM = 1 << 2
+    NODE_WITNESS = 1 << 3
+    NODE_XTHIN = 1 << 4
+
     client = Redis.current
     client.subscribe("export") do |on|
       puts on.inspect

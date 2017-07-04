@@ -33,7 +33,11 @@ class NodesController < ApplicationController
   end
 
   def countries
-
+    @countries = Node.group(:country).order('count_all desc').count
+    respond_to do |format|
+      format.html  # index.html.erb
+      format.json  { render :json => @countries }
+    end
   end
 
 
