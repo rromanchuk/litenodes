@@ -16,6 +16,7 @@ class NodesController < ApplicationController
   end
 
   def index
+    @user_agents = Node.group(:user_agent).order('count_all desc').limit(8).count
     @nodes = Node.all
     respond_to do |format|
       format.html  # index.html.erb

@@ -19,13 +19,30 @@
 
   .col-md-10
     ul.nav.nav-tabs
-      li
-        a User Agents
-      li
-        a Countries
-      li
-        a Networks
-    ul.tab-content
+      li.nav-item
+        a.nav-link data-toggle="tab" User Agents
+      li.nav-item
+        a.nav-link data-toggle="tab" Countries
+      li.nav-item
+        a.nav-link data-toggle="tab" Networks
+    .tab-content
+      .tab-pane.active#user-agents-tab
+        p Top 6 user agents with their respective number of reachable nodes.
+        table.table.table-condensed
+          tbody
+            tr
+              th width="1%" RANK
+              th width="60%" USER AGENT
+              th NODES
+            - rank = 0
+            - @user_agents.each do |agent, count|
+              - rank += 1
+              tr
+                td = rank
+                td = agent
+                td = count
+
+
 
 table.table.table-striped
   thead
