@@ -10,7 +10,7 @@ javascript:
   .col-md-4.col-lg-3
     h1 = "#{@all_nodes} NODES"
     p Top 10 countries with their respective number of reachable nodes are as follow.
-    table.table.table-condensed
+    table.table.table-sm
       tbody
         tr
           th RANK
@@ -25,3 +25,4 @@ javascript:
             td.text-center = "#{count} (#{number_to_percentage(count/@all_nodes.to_f)})"
   .col-md-8.col-lg-9
     #map
+script async="async" defer="defer" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAQq4eYwVQuWM07_96G14qx2AmZBEaXDTo&callback=initMap" type="text/javascript"

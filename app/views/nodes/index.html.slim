@@ -20,49 +20,55 @@
   .col-md-10
     ul.nav.nav-tabs
       li.nav-item
-        a.nav-link data-toggle="tab" User Agents
+        a.nav-link data-toggle="tab" role="tab" href="#user-agents-tab" User Agents
       li.nav-item
-        a.nav-link data-toggle="tab" Countries
+        a.nav-link data-toggle="tab" role="tab" href="#countries-tab" Countries
       li.nav-item
-        a.nav-link data-toggle="tab" Networks
+        a.nav-link data-toggle="tab" role="tab" href="#networks-tab" Networks
     .tab-content
-      .tab-pane.active#user-agents-tab
-        p Top 6 user agents with their respective number of reachable nodes.
-        table.table.table-condensed
-          tbody
-            tr
-              th width="1%" RANK
-              th width="60%" USER AGENT
-              th NODES
-            - rank = 0
-            - @user_agents.each do |agent, count|
-              - rank += 1
-              tr
-                td = rank
-                td = agent
-                td = count
+      = render partial: 'user_agents', locals: {user_agents: @user_agents}
+      = render partial: 'countries', locals: {countries: @countries}
+      .tab-pane#networks-tab
 
+.row
+  .col-md-12
+    form
+      .well.form-group
+        .input-group
+          input.form-control.input-sm#q type="text" name="q" placeholder="e.g. Satoshi:0.10.0, -Satoshi"
+          span.input-group-btn
+            button.btn.btn-primary.btn-sm type="submit"
+              i class="fa fa-search"
 
-
-table.table.table-striped
-  thead
-    tr
-      th Address
-      th Port
-      th Version
-      th User Agent
-      th Services
-      th Height
-      th Timestamp
-      th Hostname
-  tbody
-    - @nodes.each do |node|
-      tr
-        td = node.ip.to_s
-        td = node.port
-        td = node.version
-        td = node.user_agent
-        td = services_string(node.services)
-        td = node.height
-        td = node.timestamp
-        td = node.hostname
+.row
+  .col-md-12
+    table.table.table-striped.table-hover.table-sm
+      tbody
+        tr
+          th.hidden-sm-up NODE
+          th.hidden-xs-down ADDRESS
+          th.hidden-xs-down USER AGENT
+          th.hidden-xs-down HEIGHT
+          th.hidden-xs-down LOCATION
+          th.hidden-xs-down NETWORK
+        - @nodes.each do |node|
+          tr
+            td.hidden-sm-up
+            td.hidden-xs-down
+              a href="" title="Node status" = "#{node.ip.to_s}:#{node.port}"
+              br
+              = node.hostname
+              br
+              span.text-muted class="text-muted" Since 5&nbsp;minutes ago
+            td.hidden-xs-down
+              = node.user_agent
+              br
+              span class="text-muted" NODE_NETWORK, NODE_BLOOM, NODE_WITNESS (13)
+            td.hidden-xs-down
+              | 231020
+              .progress
+                .progress-bar style="width: 48.69%;"
+            td.hidden-xs-down
+              | Netherlands
+              br
+              span class="text-muted" Europe/Amsterdam

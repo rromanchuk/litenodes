@@ -1,0 +1,15 @@
+.tab-pane#countries-tab
+  p Top 6 countries with their respective number of reachable nodes.
+  table.table.table-sm
+    tbody
+      tr
+        th width="1%" RANK
+        th width="60%" USER AGENT
+        th NODES
+      - rank = 0
+      - countries.each do |country, count|
+        - rank += 1
+        tr
+          td = rank
+          td =  ISO3166::Country.new(country).name
+          td = count

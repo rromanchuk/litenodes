@@ -1,0 +1,15 @@
+.tab-pane.active#user-agents-tab
+  p Top 6 user agents with their respective number of reachable nodes.
+  table.table.table-sm
+    tbody
+      tr
+        th width="1%" RANK
+        th width="60%" USER AGENT
+        th NODES
+      - rank = 0
+      - user_agents.each do |agent, count|
+        - rank += 1
+        tr
+          td = rank
+          td = agent
+          td = count
