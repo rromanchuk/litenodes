@@ -20,7 +20,7 @@
   .col-md-10
     ul.nav.nav-tabs
       li.nav-item
-        a.nav-link data-toggle="tab" role="tab" href="#user-agents-tab" User Agents
+        a.nav-link.active data-toggle="tab" role="tab" href="#user-agents-tab" User Agents
       li.nav-item
         a.nav-link data-toggle="tab" role="tab" href="#countries-tab" Countries
       li.nav-item
@@ -33,12 +33,10 @@
 .row
   .col-md-12
     form
-      .well.form-group
-        .input-group
-          input.form-control.input-sm#q type="text" name="q" placeholder="e.g. Satoshi:0.10.0, -Satoshi"
-          span.input-group-btn
-            button.btn.btn-primary.btn-sm type="submit"
-              i class="fa fa-search"
+      .input-group
+        input.form-control.form-control-sm#q type="text" name="q" placeholder="e.g. Satoshi:0.10.0, -Satoshi"
+        span.input-group-btn
+          input.btn.btn-primary type="submit" Search
 
 .row
   .col-md-12
@@ -60,13 +58,13 @@
               br
               = node.hostname
               br
-              span.text-muted class="text-muted" Since 5&nbsp;minutes ago
+              span.text-muted class="text-muted" = "Since " + time_ago_in_words(node.timestamp) + " ago."
             td.d-none.d-sm-table-cell
               = node.user_agent
               br
-              span class="text-muted" NODE_NETWORK, NODE_BLOOM, NODE_WITNESS (13)
+              span class="text-muted" = "#{services_string(node.services)} (#{node.services})"
             td.d-none.d-sm-table-cell
-              | 231020
+              = node.height
               .progress
                 .progress-bar style="width: 48.69%;"
             td.d-none.d-sm-table-cell
