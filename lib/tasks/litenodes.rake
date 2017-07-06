@@ -44,13 +44,13 @@ namespace :litenodes do
         nodes_arr = JSON.parse(file)
         nodes_arr.each do |a|
           # address, port, version, user_agent, timestamp, services, height, hostname, city, country, latitude, longitude, timezone, asn, org
-          Rails.logger.info "address: #{a[0]}, port: #{a[1]}, version: #{a[2]}, user_agent: #{a[3]}, timestamp: #{a[4]}, services: #{a[5]}, height: #{a[6]}, hostname: #{a[7]}, city: #{a[8]}, country: #{a[9]}, latitude: #{a[10]}, longitude: #{a[11]}, timezone: #{a[12]}, asn: #{a[12]}, org: #{a[13]}"
+          Rails.logger.info "address: #{a[0]}, port: #{a[1]}, version: #{a[2]}, user_agent: #{a[3]}, timestamp: #{a[4]}, services: #{a[5]}, height: #{a[6]}, hostname: #{a[7]}, city: #{a[8]}, country: #{a[9]}, latitude: #{a[10]}, longitude: #{a[11]}, timezone: #{a[12]}, asn: #{a[13]}, org: #{a[14]}"
           timestamp = Time.at(a[4])
-
-          Node.find_or_initialize_by(ip: a[0]) do |node|
-            node.update_attributes(port: a[1], version: a[2], user_agent: a[3], timestamp: timestamp, services: a[5], height: a[6], hostname: a[7], city: a[8], country: a[9], latitude: a[10], longitude: a[11] )
+          if node = Node.find_by(ip: a[0], port: a[1])
+            node.update_attributes(version: a[2], user_agent: a[3], timestamp: timestamp, services: a[5], height: a[6], hostname: a[7], city: a[8], country: a[9], latitude: a[10], longitude: a[11], timezone: a[12], asn: a[13], org: a[14] )
+          else
+            Node.create!(ip: a[0], port: a[1], version: a[2], user_agent: a[3], timestamp: timestamp, services: a[5], height: a[6], hostname: a[7], city: a[8], country: a[9], latitude: a[10], longitude: a[11], timezone: a[12], asn: a[13], org: a[14])
           end
-
         end
       end
     end
