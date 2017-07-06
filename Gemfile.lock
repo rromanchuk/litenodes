@@ -272,6 +272,7 @@ DEPENDENCIES
   kaminari
   listen (>= 3.0.5, < 3.2)
   pg
+  popper_js
   puma (~> 3.7)
   rails (~> 5.1.2)
   redis
