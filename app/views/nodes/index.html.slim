@@ -45,30 +45,31 @@
     table.table.table-striped.table-hover.table-sm
       tbody
         tr
-          th.hidden-sm-up NODE
-          th.hidden-xs-down ADDRESS
-          th.hidden-xs-down USER AGENT
-          th.hidden-xs-down HEIGHT
-          th.hidden-xs-down LOCATION
-          th.hidden-xs-down NETWORK
+          th.d-xs-table-cell.d-sm-none NODE
+          th.d-none.d-sm-table-cell ADDRESS
+          th.d-none.d-sm-table-cell USER AGENT
+          th.d-none.d-sm-table-cell HEIGHT
+          th.d-none.d-sm-table-cell LOCATION
+          th.d-none.d-sm-table-cell NETWORK
         - @nodes.each do |node|
           tr
-            td.hidden-sm-up
-            td.hidden-xs-down
+            td.d-xs-table-cell.d-sm-none
+              p special cell
+            td.d-none.d-sm-table-cell
               a href="" title="Node status" = "#{node.ip.to_s}:#{node.port}"
               br
               = node.hostname
               br
               span.text-muted class="text-muted" Since 5&nbsp;minutes ago
-            td.hidden-xs-down
+            td.d-none.d-sm-table-cell
               = node.user_agent
               br
               span class="text-muted" NODE_NETWORK, NODE_BLOOM, NODE_WITNESS (13)
-            td.hidden-xs-down
+            td.d-none.d-sm-table-cell
               | 231020
               .progress
                 .progress-bar style="width: 48.69%;"
-            td.hidden-xs-down
+            td.d-none.d-sm-table-cell
               | Netherlands
               br
               span class="text-muted" Europe/Amsterdam
