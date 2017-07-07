@@ -34,6 +34,7 @@ gem 'jquery-rails'
 gem 'popper_js'
 gem 'slim'
 gem 'kaminari'
+gem 'chewy'
 
 #gem 'countries'
 gem 'countries', :require => 'countries/global'
