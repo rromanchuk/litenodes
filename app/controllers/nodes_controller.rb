@@ -20,7 +20,8 @@ class NodesController < ApplicationController
     @countries = Node.group(:country).order('count_all desc').limit(6).count
     @networks = Node.group(:org).order('count_all desc').limit(6).count
 
-    @nodes = Node.all
+    @nodes = Node.order('timestamp desc').page params[:page]
+
     respond_to do |format|
       format.html  # index.html.erb
       format.json  #{ render :json => @nodes }
