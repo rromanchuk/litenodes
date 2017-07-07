@@ -35,7 +35,9 @@ gem 'popper_js'
 gem 'slim'
 gem 'kaminari'
 
-gem 'countries'
+#gem 'countries'
+gem 'countries', :require => 'countries/global'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

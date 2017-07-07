@@ -1,0 +1,15 @@
+.tab-pane.active#networks-tab
+  p Top 6 networks with their respective number of reachable nodes.
+  table.table.table-sm
+    tbody
+      tr
+        th width="1%" RANK
+        th width="60%" NETWORK
+        th NODES
+      - rank = 0
+      - networks.each do |network, count|
+        - rank += 1
+        tr
+          td = rank
+          td = network
+          td = count

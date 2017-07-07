@@ -22,7 +22,7 @@ javascript:
           - rank += 1
           tr
             td.text-center = rank
-            td.text-center =  ISO3166::Country.new(country).name
+            td.text-center = Country[country].name
             td.text-center = "#{count} (#{number_to_percentage((count/@all_nodes.to_f * 100), precision: 0) })"
   .col-md-8.col-lg-9
     #map

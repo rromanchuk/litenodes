@@ -11,5 +11,5 @@
         - rank += 1
         tr
           td = rank
-          td =  ISO3166::Country.new(country).name
+          td = Country[country].name
           td = count

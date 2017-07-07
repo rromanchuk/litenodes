@@ -28,7 +28,7 @@
     .tab-content
       = render partial: 'user_agents', locals: {user_agents: @user_agents}
       = render partial: 'countries', locals: {countries: @countries}
-      .tab-pane#networks-tab
+      = render partial: 'networks', locals: {networks: @networks}
 
 .row
   .col-md-12
@@ -68,6 +68,10 @@
               .progress
                 .progress-bar style="width: 48.69%;"
             td.d-none.d-sm-table-cell
-              | Netherlands
+              = Country[node.country]&.name
               br
-              span class="text-muted" Europe/Amsterdam
+              span class="text-muted" = node.timezone
+            td.d-none.d-sm-table-cell
+              = node.org
+              br
+              span.text-muted = node.asn

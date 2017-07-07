@@ -18,6 +18,7 @@ class NodesController < ApplicationController
   def index
     @user_agents = Node.group(:user_agent).order('count_all desc').limit(6).count
     @countries = Node.group(:country).order('count_all desc').limit(6).count
+    @networks = Node.group(:org).order('count_all desc').limit(6).count
 
     @nodes = Node.all
     respond_to do |format|
