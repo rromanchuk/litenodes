@@ -30,16 +30,6 @@
       = render partial: 'countries', locals: {countries: @countries}
       = render partial: 'networks', locals: {networks: @networks}
 
-.row
-  .col-md-12
-    form action="/search"
-      .input-group
-        input.form-control.form-control-sm#q type="text" name="q" placeholder="e.g. Satoshi:0.10.0, -Satoshi"
-        span.input-group-btn
-          input.btn.btn-primary type="submit" Search
 
-.row
-  .col-md-12
-    = paginate @nodes
 
 = render partial: 'shared/nodes', locals: {nodes: @nodes}

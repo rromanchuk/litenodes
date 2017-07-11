@@ -1,5 +1,17 @@
 .row
   .col-md-12
+    form action="/search"
+      .input-group
+        input.form-control.form-control-sm#q type="text" name="q" placeholder="e.g. Satoshi:0.10.0, -Satoshi"
+        span.input-group-btn
+          input.btn.btn-primary type="submit" Search
+
+.row
+  .col-md-12
+    = paginate nodes
+
+.row
+  .col-md-12
     table.table.table-striped.table-hover.table-sm
       tbody
         tr
@@ -27,7 +39,7 @@
               = node.height
               .progress
                 - if Node.height > 0
-                  .progress-bar style="width: #{number_to_percentage(node.height/Node.height * 100)};"
+                  .progress-bar style="width: #{number_to_percentage(node.height/Node.height)};"
             td.d-none.d-sm-table-cell
               = Country[node.country]&.name
               br
