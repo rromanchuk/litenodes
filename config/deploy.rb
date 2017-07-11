@@ -15,7 +15,7 @@ set :rbenv_roles, :all # default value
 
 
 # Default branch is :master
-ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
+set :branch, `git rev-parse --abbrev-ref HEAD`.chomp
 
 
 set :default_env, rails_env: "production"

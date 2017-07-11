@@ -1,6 +1,6 @@
 class NodesIndex < Chewy::Index
   define_type Node do
-    field :ip
+    field :address
     field :user_agent
     field :org
   end
