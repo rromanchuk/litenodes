@@ -69,7 +69,7 @@
             td.d-none.d-sm-table-cell
               = node.height
               .progress
-                .progress-bar style="width: 48.69%;"
+                .progress-bar style="width: #{number_to_percentage(node.height/Node.height * 100)};"
             td.d-none.d-sm-table-cell
               = Country[node.country]&.name
               br
