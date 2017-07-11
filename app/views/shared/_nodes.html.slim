@@ -1,0 +1,38 @@
+.row
+  .col-md-12
+    table.table.table-striped.table-hover.table-sm
+      tbody
+        tr
+          th.d-xs-table-cell.d-sm-none NODE
+          th.d-none.d-sm-table-cell ADDRESS
+          th.d-none.d-sm-table-cell USER AGENT
+          th.d-none.d-sm-table-cell HEIGHT
+          th.d-none.d-sm-table-cell LOCATION
+          th.d-none.d-sm-table-cell NETWORK
+        - nodes.each do |node|
+          tr
+            td.d-xs-table-cell.d-sm-none
+              p special cell
+            td.d-none.d-sm-table-cell
+              a href="" title="Node status" = "#{node.ip.to_s}:#{node.port}"
+              br
+              = node.hostname
+              br
+              span.text-muted class="text-muted" = "Since " + time_ago_in_words(node.timestamp) + " ago."
+            td.d-none.d-sm-table-cell
+              = node.user_agent
+              br
+              span class="text-muted" = "#{services_string(node.services)} (#{node.services})"
+            td.d-none.d-sm-table-cell
+              = node.height
+              .progress
+                - if Node.height > 0
+                  .progress-bar style="width: #{number_to_percentage(node.height/Node.height * 100)};"
+            td.d-none.d-sm-table-cell
+              = Country[node.country]&.name
+              br
+              span class="text-muted" = node.timezone
+            td.d-none.d-sm-table-cell
+              = node.org
+              br
+              span.text-muted = node.asn

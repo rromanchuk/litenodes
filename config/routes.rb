@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   end
 
   get 'nodes/*host/port/*port', to: 'nodes#by_host_and_port'
+  get 'search', to: 'search#search'
 
   root to: 'home#index'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
