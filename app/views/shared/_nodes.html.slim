@@ -32,7 +32,7 @@
               br
               span.text-muted class="text-muted" = "Since " + time_ago_in_words(node.timestamp) + " ago."
             td.d-none.d-sm-table-cell
-              = node.user_agent
+              = link_to node.user_agent, search_path(q: node.user_agent)
               br
               span class="text-muted" = "#{services_string(node.services)} (#{node.services})"
             td.d-none.d-sm-table-cell
