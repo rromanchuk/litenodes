@@ -2,18 +2,7 @@ class SearchController < ApplicationController
 
   def search
     @q = sanitize_string(params[:q])
-
-  end
-
-  def users_results
-    # UsersIndex::User.query(multi_match: { query:  "ryan", fields: ['username', 'full_name']  }).load.to_a
-    @nodes = NodeIndex.query(nodes_query).load.to_a
-  end
-
-  def nodes_query
-    {
-      multi_match: { query: @q, fields: ['useragent', 'address'] }
-    }
+    @nodes = Node.search(@q).to_a
   end
 
   def sanitize_string(str)
