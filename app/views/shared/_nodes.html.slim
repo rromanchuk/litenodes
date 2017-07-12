@@ -39,12 +39,12 @@
               = node.height
               .progress
                 - if Node.height > 0
-                  .progress-bar style="width: #{number_to_percentage(node.height/Node.height)};"
+                  .progress-bar style="width: #{number_to_percentage(node.height/Node.height * 1000)};"
             td.d-none.d-sm-table-cell
               = Country[node.country]&.name
               br
               span class="text-muted" = node.timezone
             td.d-none.d-sm-table-cell
-              = node.org
+              = link_to node.org, search_path(q: node.org)
               br
               span.text-muted = node.asn
