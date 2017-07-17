@@ -19,7 +19,7 @@ class NodesController < ApplicationController
     @user_agents = Node.group(:user_agent).order('count_all desc').limit(6).count
     @countries = Node.group(:country).order('count_all desc').limit(6).count
     @networks = Node.group(:org).order('count_all desc').limit(6).count
-
+    @all_nodes = Node.count
     @nodes = Node.order('timestamp desc').page params[:page]
 
     respond_to do |format|

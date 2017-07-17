@@ -25,4 +25,8 @@ module NodesHelper
     services <<  "NODE_XTHIN" if mask & NODE_XTHIN > 0
     services
   end
+
+  def height_percentage(node)
+    number_to_percentage(node.height / Node.height.to_f * 100)
+  end
 end

@@ -39,7 +39,7 @@
               = node.height
               .progress
                 - if Node.height > 0
-                  .progress-bar style="width: #{number_to_percentage(node.height/Node.height * 1000)};"
+                  .progress-bar style="width: #{height_percentage(node)};"
             td.d-none.d-sm-table-cell
               = Country[node.country]&.name
               br
