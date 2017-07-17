@@ -36,7 +36,10 @@
               br
               span class="text-muted" = "#{services_string(node.services)} (#{node.services})"
             td.d-none.d-sm-table-cell
-              = node.height
+              - if Node.height > 0
+                = "#{node.height} (#{node.height} / #{Node.height} = #{height_percentage(node)})"
+              - else
+                = node.height
               .progress
                 - if Node.height > 0
                   .progress-bar style="width: #{height_percentage(node)};"
