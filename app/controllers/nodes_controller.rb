@@ -20,7 +20,7 @@ class NodesController < ApplicationController
     @countries = Node.group(:country).order('count_all desc').limit(6).count
     @networks = Node.group(:org).order('count_all desc').limit(6).count
     @all_nodes = Node.count
-    @nodes = Node.order('timestamp desc').page params[:page]
+    @nodes = Node.order('updated_at desc').page params[:page]
 
     respond_to do |format|
       format.html  # index.html.erb

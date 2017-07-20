@@ -24,13 +24,25 @@
         - nodes.each do |node|
           tr
             td.d-xs-table-cell.d-sm-none
-              p special cell
+              a href="" title="Node status" = "#{node.ip.to_s}:#{node.port}"
+              br
+              span = node.hostname
+              br
+              span.texted-muted = "Since " + time_ago_in_words(node.timestamp) + " ago."
+              br
+              span = node.user_agent
+              br
+              span.texted-muted = node.height
+              br
+              span.text-muted = Country[node.country]&.name
+              br
+              span.text-muted = node.timezone
             td.d-none.d-sm-table-cell
               a href="" title="Node status" = "#{node.ip.to_s}:#{node.port}"
               br
               = node.hostname
               br
-              span.text-muted class="text-muted" = "Since " + time_ago_in_words(node.timestamp) + " ago."
+              span.text-muted = "Since " + time_ago_in_words(node.timestamp) + " ago."
             td.d-none.d-sm-table-cell
               = link_to node.user_agent, search_path(q: node.user_agent)
               br
@@ -43,7 +55,7 @@
             td.d-none.d-sm-table-cell
               = Country[node.country]&.name
               br
-              span class="text-muted" = node.timezone
+              span.text-muted = node.timezone
             td.d-none.d-sm-table-cell
               = link_to node.org, search_path(q: node.org)
               br
