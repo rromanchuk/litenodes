@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/twbs/bootstrap-rubygem
-  revision: b156edfee2b9629ad4751ee2a118a04f824ef9eb
+  revision: bd3d58a56c46d1f87785298706b136b73c192b8b
   branch: master
   specs:
     bootstrap (4.0.0.alpha6)
@@ -53,16 +53,16 @@ GEM
     airbrussh (1.3.0)
       sshkit (>= 1.6.1, != 1.7.0)
     arel (8.0.0)
-    autoprefixer-rails (7.1.2.1)
+    autoprefixer-rails (7.1.2.3)
       execjs
-    aws-sdk (2.10.9)
-      aws-sdk-resources (= 2.10.9)
-    aws-sdk-core (2.10.9)
+    aws-sdk (2.10.14)
+      aws-sdk-resources (= 2.10.14)
+    aws-sdk-core (2.10.14)
       aws-sigv4 (~> 1.0)
       jmespath (~> 1.0)
-    aws-sdk-resources (2.10.9)
-      aws-sdk-core (= 2.10.9)
-    aws-sigv4 (1.0.0)
+    aws-sdk-resources (2.10.14)
+      aws-sdk-core (= 2.10.14)
+    aws-sigv4 (1.0.1)
     bindex (0.5.0)
     builder (3.2.3)
     byebug (9.0.6)
@@ -215,14 +215,18 @@ GEM
     redis (3.3.3)
     ruby_dep (1.5.0)
     rubyzip (1.2.1)
-    sass (3.4.25)
+    sass (3.5.1)
+      sass-listen (~> 4.0.0)
+    sass-listen (4.0.0)
+      rb-fsevent (~> 0.9, >= 0.9.4)
+      rb-inotify (~> 0.9, >= 0.9.7)
     sass-rails (5.0.6)
       railties (>= 4.0.0, < 6)
       sass (~> 3.1)
       sprockets (>= 2.8, < 4.0)
       sprockets-rails (>= 2.0, < 4.0)
       tilt (>= 1.1, < 3)
-    selenium-webdriver (3.4.3)
+    selenium-webdriver (3.4.4)
       childprocess (~> 0.5)
       rubyzip (~> 1.0)
     sixarm_ruby_unaccent (1.1.2)
