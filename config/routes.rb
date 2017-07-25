@@ -3,6 +3,7 @@ Rails.application.routes.draw do
     collection do
       get 'user_agents', to: 'nodes#user_agents'
       get 'countries', to: 'nodes#countries'
+      get 'coordinates', to: 'nodes#coordinates'
     end
   end
 

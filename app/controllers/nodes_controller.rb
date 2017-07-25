@@ -45,5 +45,15 @@ class NodesController < ApplicationController
     end
   end
 
+  def coordinates
+    @nodes = Node.all
+    @nodes = Node.to_geojson(@nodes)
+
+    respond_to do |format|
+      format.html  # index.html.erb
+      format.json  { render :json => @nodes }
+    end
+  end
+
 
 end

@@ -24,4 +24,20 @@ class Node < ApplicationRecord
     }
   end
 
+  def to_geojson
+    [longitude.to_f, latitude.to_f]
+  end
+
+  def self.to_geojson(nodes)
+    {type: "FeatureCollection",
+      features: [
+        type: "Feature",
+        geometry: {
+          type: "MultiPoint",
+          coordinates: nodes.map(&:to_geojson)
+        }
+      ]
+    }
+  end
+
 end
