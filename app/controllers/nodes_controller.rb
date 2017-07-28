@@ -15,12 +15,20 @@ class NodesController < ApplicationController
     end
   end
 
+  def show
+    @node = Node.find params[:id]
+    respond_to do |format|
+      format.html  # index.html.erb
+      format.json  #{ render :json => @nodes }
+    end
+  end
+
   def index
     @user_agents = Node.group(:user_agent).order('count_all desc').limit(6).count
     @countries = Node.group(:country).order('count_all desc').limit(6).count
     @networks = Node.group(:org).order('count_all desc').limit(6).count
     @all_nodes = Node.count
-    @nodes = Node.order('updated_at desc').page params[:page]
+    @nodes = Node.order('timestamp desc').page params[:page]
 
     respond_to do |format|
       format.html  # index.html.erb
