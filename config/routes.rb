@@ -5,6 +5,10 @@ Rails.application.routes.draw do
       get 'countries', to: 'nodes#countries'
       get 'coordinates', to: 'nodes#coordinates'
     end
+
+    member do
+      get 'latency', to: 'nodes#latency'
+    end
   end
 
   get 'nodes/*host/port/*port', to: 'nodes#by_host_and_port'

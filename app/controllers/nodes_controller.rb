@@ -23,6 +23,15 @@ class NodesController < ApplicationController
     end
   end
 
+  def latency
+    node = Node.find params[:id]
+    @latency_arr = node.rtt_latency_array
+    respond_to do |format|
+      format.html  # index.html.erb
+      format.json  { render :json => @latency_arr }
+    end
+  end
+
   def index
     @user_agents = Node.group(:user_agent).order('count_all desc').limit(6).count
     @countries = Node.group(:country).order('count_all desc').limit(6).count

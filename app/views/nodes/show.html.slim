@@ -1,3 +1,24 @@
+javascript:
+  $(function () {
+    var myChart = Highcharts.chart('latency-chart', {
+        chart: {
+            type: 'line'
+        },
+        title: {
+            text: 'Node latency'
+        },
+        yAxis: {
+            title: {
+                text: 'Latency in ms'
+            }
+        },
+        series: [{
+            data: [40, 48, 1498]
+        }]
+    });
+  });
+
+
 .row
   .col-md-12
     h3 Node status
@@ -12,6 +33,9 @@
       li.list-group-item
         h3 = "#{@node.ip.to_s}:#{@node.port}"
         span = @node.hostname
+      li.list-group-item
+        .chart.annotated-chart
+          #latency-chart
       li.list-group-item
         h4 DOWN
         span.field.timestamp Fri Jul 28 2017 12:40:07 GMT-0700 (PDT)

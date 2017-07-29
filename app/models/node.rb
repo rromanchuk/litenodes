@@ -24,6 +24,10 @@ class Node < ApplicationRecord
     }
   end
 
+  def rtt_latency_array
+    Redis.current.lrange("rtt:#{ip.to_s}-#{port}", 0, 10)
+  end
+
   def to_geojson
     [longitude.to_f, latitude.to_f]
   end
