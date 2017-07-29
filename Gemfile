@@ -50,6 +50,11 @@ gem 'capistrano3-puma' , group: :development
 gem 'dynamoid'
 gem 'aws-sdk'
 
+group :production do
+  gem "lograge"
+  gem "rbtrace"
+end
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
