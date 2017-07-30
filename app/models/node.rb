@@ -26,7 +26,7 @@ class Node < ApplicationRecord
   end
 
   def rtt_latency_array
-    Redis.current.lrange("rtt:#{ip.to_s}-#{port}", 0, 10)
+    Redis.current.lrange("rtt:#{ip.to_s}-#{port}", 0, 10).map(&:to_i)
   end
 
   def average_latency
