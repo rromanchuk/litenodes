@@ -42,11 +42,11 @@
               br
               = node.hostname
               br
-              span.text-muted = "Since " + time_ago_in_words(node.timestamp) + " ago."
+              small.text-muted = "Since " + time_ago_in_words(node.timestamp) + " ago."
             td.d-none.d-sm-table-cell
               = link_to node.user_agent, search_path(q: node.user_agent)
               br
-              span class="text-muted" = "#{services_string(node.services)} (#{node.services})"
+              small.text-muted = "#{services_string(node.services)} (#{node.services})"
             td.d-none.d-sm-table-cell
               = node.height
               .progress
@@ -55,8 +55,8 @@
             td.d-none.d-sm-table-cell
               = Country[node.country]&.name
               br
-              span.text-muted = node.timezone
+              small.text-muted = node.timezone
             td.d-none.d-sm-table-cell
               = link_to node.org, search_path(q: node.org)
               br
-              span.text-muted = node.asn
+              small.text-muted = node.asn
