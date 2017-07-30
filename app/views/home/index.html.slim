@@ -23,8 +23,8 @@ javascript:
           - rank += 1
           tr
             td.text-center = rank
-            td.text-center = Country[country]&.name
-            td.text-center = "#{count} (#{number_to_percentage((count/@all_nodes.to_f * 100), precision: 0) })"
+            td = Country[country]&.name
+            td = "#{count} (#{number_to_percentage((count/@all_nodes.to_f * 100), precision: 0) })"
   .col-md-8.col-lg-9
     #map
     p Map shows concentration of reachable Litecoin nodes found in countries around the world.
