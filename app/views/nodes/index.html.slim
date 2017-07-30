@@ -10,11 +10,11 @@
     br
     h3 = @all_nodes
     p.text-muted Nodes
-    h3 300
+    h3 = @ip_version_types["ipv4"]
     p.text-muted IPv4
-    h3 100
+    h3 = @ip_version_types["ipv6"]
     p.text-muted IPv6
-    h3 30
+    h3 0
     p.texted-muted .onion
 
   .col-md-10

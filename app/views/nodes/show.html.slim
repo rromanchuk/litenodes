@@ -39,7 +39,7 @@ javascript:
           #latency-chart
       li.list-group-item
         h4 = @node.status
-        span.field.timestamp Fri Jul 28 2017 12:40:07 GMT-0700 (PDT)
+        span.field.timestamp = @node.timestamp
         h4 = @node.average_latency
         span.field Average latency
       li.list-group-item
@@ -52,7 +52,7 @@ javascript:
         h4 = "#{@node.height} #{height_percentage(@node)}"
         span.field Height
       li.list-group-item
-        h4 Bloomington, United States
+        h4 = Country[node.country]&.name
         span.field Location
         h4 = @node.timezone
         span.field Timezone

@@ -37,6 +37,7 @@ class NodesController < ApplicationController
     @countries = Node.group(:country).order('count_all desc').limit(6).count
     @networks = Node.group(:org).order('count_all desc').limit(6).count
     @all_nodes = Node.count
+    @ip_version_types = Node.ip_versions
     @nodes = Node.order('timestamp desc').page params[:page]
 
     respond_to do |format|

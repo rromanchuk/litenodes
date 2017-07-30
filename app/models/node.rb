@@ -11,12 +11,8 @@ class Node < ApplicationRecord
     NodesIndex.query(nodes_query(q)).load
   end
 
-  def self.ipv4_nodes
-    Node.group('family').select('family(ip), COUNT(*)')
-  end
-
-  def self.ipv6_nodes
-    Node.group('family').select('family(ip), COUNT(*)')
+  def self.ip_versions
+    Node.group(:ip_version).count
   end
 
   def self.nodes_query(q)
