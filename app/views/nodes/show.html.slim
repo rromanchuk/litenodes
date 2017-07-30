@@ -1,5 +1,6 @@
 javascript:
   $(function () {
+    var latency_arr   = "#{@node.rtt_latency_array.to_json}";
     var myChart = Highcharts.chart('latency-chart', {
         chart: {
             type: 'line'
@@ -13,7 +14,7 @@ javascript:
             }
         },
         series: [{
-            data: [40, 48, 1498]
+            data: latency_arr
         }]
     });
   });
