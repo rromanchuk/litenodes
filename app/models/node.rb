@@ -29,9 +29,16 @@ class Node < ApplicationRecord
     Redis.current.lrange("rtt:#{ip.to_s}-#{port}", 0, 10)
   end
 
-  def status
-    key = "node:#{ip.to_s}-{port}-{from_services}"
+  def average_latency
+    rtt_latency_array.reduce(:+).to_f / rtt_latency_array.size
+  end
 
+  def status
+    Redis.current.hget("node:#{ip.to_s}-{port}-{from_services}", "state")
+  end
+
+  def pings
+    Redis.current.lrange("ping:#{ip.to_s}-{port}", 0, -1)
   end
 
   def determine_ip_version
