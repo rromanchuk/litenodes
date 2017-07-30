@@ -7,8 +7,10 @@ html
     script src="http://code.highcharts.com/highcharts.js"
     = yield :head
     = csrf_meta_tags
+    link rel="shortcut icon" type="image/png" href="#{image_path('ltc-ico-32px.png')}"
     meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"
-
+    meta name="description" content="Litenodes is currently being developed to estimate the size of the Litecoin network by finding all the reachable nodes in the network."
+    meta property="og:title" content="Global Litecoin nodes distribution"
   body
     .container
       .row
