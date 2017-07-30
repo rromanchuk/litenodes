@@ -12,7 +12,13 @@
  *
  */
 
+$font-family-sans-serif: "Noto Sans", "Helvetica Neue", "Helvetica", Arial, sans-serif;
+$font-size-base:          1rem;
+$h3-font-size:            1.25rem;
+
 @import "bootstrap";
+
+
 
 #map {
   height: 100%;
