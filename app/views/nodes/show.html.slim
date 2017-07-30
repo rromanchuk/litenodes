@@ -33,30 +33,30 @@ javascript:
     ul.list-group.big.text-center
       li.list-group-item
         h3 = "#{@node.ip.to_s}:#{@node.port}"
-        span = @node.hostname
+        small = @node.hostname
       li.list-group-item
         .chart.annotated-chart
           #latency-chart
       li.list-group-item
         h4 = @node.status
-        span.field.timestamp = @node.timestamp
+        small.field.timestamp = @node.timestamp
         h4 = @node.average_latency
-        span.field Average latency
+        small.field Average latency
       li.list-group-item
         h4 = @node.user_agent
-        span.field User agent
+        small.field User agent
         h4 = @node.version
-        span.field Protocol version
+        small.field Protocol version
         h4 = "#{services_string(@node.services)} (#{@node.services})"
-        span.field Services
+        small.field Services
         h4 = "#{@node.height} #{height_percentage(@node)}"
-        span.field Height
+        small.field Height
       li.list-group-item
         h4 = Country[@node.country]&.name
-        span.field Location
+        small.field Location
         h4 = @node.timezone
-        span.field Timezone
+        small.field Timezone
         h4 = @node.org
-        span.field Network
+        small.field Network
         h4 = @node.asn
-        span.field ASN
+        small.field ASN
