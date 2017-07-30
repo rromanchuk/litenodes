@@ -34,7 +34,7 @@ gem 'jquery-rails'
 gem 'popper_js'
 gem 'slim'
 gem 'kaminari'
-gem 'chewy'
+gem 'chewy', '0.9.0'
 
 #gem 'countries'
 gem 'countries', :require => 'countries/global'
@@ -49,6 +49,11 @@ gem 'capistrano3-puma' , group: :development
 
 gem 'dynamoid'
 gem 'aws-sdk'
+
+group :production do
+  gem "lograge"
+  gem "rbtrace"
+end
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

@@ -4,10 +4,13 @@ html
     title Litenodes
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
+    script src="http://code.highcharts.com/highcharts.js"
     = yield :head
     = csrf_meta_tags
+    link rel="shortcut icon" type="image/png" href="#{image_path('ltc-ico-32px.png')}"
     meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"
-
+    meta name="description" content="Litenodes is currently being developed to estimate the size of the Litecoin network by finding all the reachable nodes in the network."
+    meta property="og:title" content="Global Litecoin nodes distribution"
   body
     .container
       .row
@@ -28,8 +31,10 @@ html
               | &nbsp;
               a href="//en.bitcoin.it/wiki/Protocol_specification#getaddr" target="_blank" getaddr
               |  messages recursively to find all the reachable nodes in the network, starting from a set of seed nodes. Litenodes uses Litecoin protocol version 70001 (i.e. >= /Satoshi:0.8.x/), so nodes running an older protocol version will be skipped. The crawler implementation in Python is available from
+              | &nbsp;
               a href="//github.com/rromanchuk/bitnodes" target="_blank" GitHub (rromanchuk/bitnodes)
               | forked from
+              | &nbsp;
               a href="//github.com/ayeowch/bitnodes" target="_blank" GitHub (ayeowch/bitnodes)
 
 

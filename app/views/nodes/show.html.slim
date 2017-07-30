@@ -1,0 +1,62 @@
+javascript:
+  $(function () {
+    var latency_arr   = "#{@node.rtt_latency_array.to_json}";
+    var myChart = Highcharts.chart('latency-chart', {
+        chart: {
+            type: 'line'
+        },
+        title: {
+            text: 'Node latency'
+        },
+        yAxis: {
+            title: {
+                text: 'Latency in ms'
+            }
+        },
+        series: [{
+            data: latency_arr
+        }]
+    });
+  });
+
+
+.row
+  .col-md-12
+    h3 Node status
+    p
+      | Node information is updated every 5 minutes. Last updated on
+      span.timestamp Fri Jul 28 2017 12:50:12 GMT-0700 (PDT)
+.row
+  .col-md-3
+  .col-md-6
+    br
+    ul.list-group.big.text-center
+      li.list-group-item
+        h3 = "#{@node.ip.to_s}:#{@node.port}"
+        span = @node.hostname
+      li.list-group-item
+        .chart.annotated-chart
+          #latency-chart
+      li.list-group-item
+        h4 DOWN
+        span.field.timestamp Fri Jul 28 2017 12:40:07 GMT-0700 (PDT)
+        h4 133ms
+        span.field Average latency
+      li.list-group-item
+        h4 = @node.user_agent
+        span.field User agent
+        h4 = @node.version
+        span.field Protocol version
+        h4 = "#{services_string(@node.services)} (#{@node.services})"
+        span.field Services
+        h4 477997 (99.99%)
+        span.field Height
+      li.list-group-item
+        h4 Bloomington, United States
+        span.field Location
+        h4 = @node.timezone
+        span.field Timezone
+        h4 = @node.org
+        span.field Network
+        h4 = @node.asn
+        span.field ASN

@@ -5,3 +5,4 @@ if ENV["REDIS_URL"].present?
 else
   raise "REDIS_URL is not present"
 end
+
