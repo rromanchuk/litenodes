@@ -15,6 +15,10 @@ class Node < ApplicationRecord
     Node.group(:ip_version).count
   end
 
+  def self.add_node(address, port)
+    Redis.current.zadd("check", Time.now.to_i.to_s, [address, port, "1"].to_json)
+  end
+
   def self.nodes_query(q)
     {
       multi_match: { query: q, fields: ['user_agent', 'address'] }
@@ -26,7 +30,7 @@ class Node < ApplicationRecord
   end
 
   def average_latency
-    rtt_latency_array.reduce(:+).to_f / rtt_latency_array.size
+     rtt_latency_array.reduce(:+).to_f / rtt_latency_array.size
   end
 
   def status

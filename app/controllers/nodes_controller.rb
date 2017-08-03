@@ -1,4 +1,8 @@
 class NodesController < ApplicationController
+  def join
+    Node.add_node(params[:host], params[:port])
+  end
+
   def show
     @node = Node.find params[:id]
     respond_to do |format|

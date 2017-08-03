@@ -35,10 +35,12 @@ hr
     p
       = "Be part of the Litecoin network by running a Litecoin "
       = link_to "full node", "https://litecoin.org/"
-    form
+    = form_tag("/nodes/join", method: "post", class: 'form-inline') do
       .input-group
-        input.form-control.form-control-sm#q type="text" name="host" value="#{@host_address}"
-        input.form-control.form-control-sm#q type="text" name="port" placeholder="9333" value="9333"
+        label.sr-only for="hostInput" Node Address
+        input.mb-2.mr-sm-2.mb-sm-0.form-control#hostInput type="text" name="host" value="#{@host_address}"
+        label.sr-only for="portInput" Node Port
+        input.form-control#portInput type="text" name="port" placeholder="9333" value="9333"
         span.input-group-btn
           input.btn.btn-primary type="submit" Search
 script async="async" defer="defer" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAQq4eYwVQuWM07_96G14qx2AmZBEaXDTo&callback=initMap&libraries=visualization" type="text/javascript"

@@ -4,6 +4,7 @@ Rails.application.routes.draw do
       get 'user_agents', to: 'nodes#user_agents'
       get 'countries', to: 'nodes#countries'
       get 'coordinates', to: 'nodes#coordinates'
+      post 'join', to: 'nodes#join'
     end
 
     member do
@@ -12,6 +13,7 @@ Rails.application.routes.draw do
   end
 
   get 'nodes/*host/port/*port', to: 'nodes#by_host_and_port'
+  post 'nodes/*host/port/*port', to: 'nodes#join'
   get 'search', to: 'search#search'
 
   root to: 'home#index'
