@@ -67,6 +67,15 @@ class NodesController < ApplicationController
     end
   end
 
+  def heatmap
+    @coords = Node.all.map(&:to_geojson)
+    respond_to do |format|
+      format.html  # index.html.erb
+      format.json  { render :json => @coords }
+    end
+  end
+
+
   def coordinates
     @nodes = Node.all
     @nodes = Node.to_geojson(@nodes)

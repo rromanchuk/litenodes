@@ -1,12 +1,26 @@
 javascript:
   var map;
+
+
+
   function initMap() {
+
+
     map = new google.maps.Map(document.getElementById('map'), {
       center: {lat: -34.397, lng: 150.644},
       zoom: 8
     });
-    map.data.loadGeoJson('/nodes/coordinates.json');
+    // map.data.loadGeoJson('/nodes/coordinates.json');
+
+    var heatmap = new google.maps.visualization.HeatmapLayer({
+      data: heatmapData
+    });
+    heatmap.setMap(map);
   }
+
+
+
+
 .row
   .col-md-4.col-lg-3
     h3

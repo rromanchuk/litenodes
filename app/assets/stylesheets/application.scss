@@ -81,6 +81,8 @@ $theme-colors: (
 $font-family-sans-serif: "Noto Sans", "Helvetica Neue", "Helvetica", Arial, sans-serif;
 $font-size-base:          1rem;
 $h3-font-size:            1.25rem;
+$h4-font-size:            1.00rem;
+
 
 @import "bootstrap";
 
@@ -106,7 +108,7 @@ $h3-font-size:            1.25rem;
 
 .field {
   color: #555;
-  font-size: .85em;
+  font-size: .75em;
   text-transform: uppercase;
 }
 

@@ -4,6 +4,7 @@ Rails.application.routes.draw do
       get 'user_agents', to: 'nodes#user_agents'
       get 'countries', to: 'nodes#countries'
       get 'coordinates', to: 'nodes#coordinates'
+      get 'heatmap', to: 'nodes#heatmap'
       post 'join', to: 'nodes#join'
     end
 
