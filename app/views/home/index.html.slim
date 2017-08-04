@@ -38,7 +38,7 @@ javascript:
           tr
             td.text-center = rank
             - c_name = Country[country]&.translated_names&.first
-            td = link_to c_name, search_path(q: c_name)
+            td = c_name ? link_to(c_name, search_path(q: c_name)) : Unknown
             td = "#{count} (#{number_to_percentage((count/@all_nodes.to_f * 100), precision: 0) })"
   .col-md-8.col-lg-9
     #map
