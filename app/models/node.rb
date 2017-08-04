@@ -1,5 +1,5 @@
 class Node < ApplicationRecord
-  before_create :determine_ip_version
+  before_create :determine_ip_version, :determine_friendly_country_name
 
   update_index('nodes#node') { self }
 
@@ -39,6 +39,10 @@ class Node < ApplicationRecord
 
   def pings
     Redis.current.lrange("ping:#{ip.to_s}-{port}", 0, -1)
+  end
+
+  def determine_friendly_country_name
+    self.country_friendly_name = Country[country]&.translated_names&.first
   end
 
   def determine_ip_version
