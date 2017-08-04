@@ -3,6 +3,10 @@ class Node < ApplicationRecord
 
   update_index('nodes#node') { self }
 
+  def self.last_export
+    Redis.current.get('last_export')
+  end
+
   def self.height
     Redis.current.get('height').to_i || 0
   end

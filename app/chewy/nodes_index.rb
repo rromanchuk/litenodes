@@ -3,5 +3,6 @@ class NodesIndex < Chewy::Index
     field :address
     field :user_agent
     field :org
+    field :country_friendly_name
   end
 end
