@@ -8,7 +8,7 @@ javascript:
 
     map = new google.maps.Map(document.getElementById('map'), {
       center: {lat: -34.397, lng: 150.644},
-      zoom: 8
+      zoom: 2
     });
     // map.data.loadGeoJson('/nodes/coordinates.json');
 
@@ -37,7 +37,8 @@ javascript:
           - rank += 1
           tr
             td.text-center = rank
-            td = Country[country]&.name
+            - c_name = Country[country]&.translated_names.first
+            td = link_to c_name, search_path(q: c_name)
             td = "#{count} (#{number_to_percentage((count/@all_nodes.to_f * 100), precision: 0) })"
   .col-md-8.col-lg-9
     #map
