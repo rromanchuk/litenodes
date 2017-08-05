@@ -10,12 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170804163629) do
+ActiveRecord::Schema.define(version: 20170804225416) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "pgcrypto"
   enable_extension "uuid-ossp"
+
+  create_table "alerts_tables", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
+    t.text "email"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
 # Could not dump table "nodes" because of following StandardError
 #   Unknown type 'ip_version_type' for column 'ip_version'
