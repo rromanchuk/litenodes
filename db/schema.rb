@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170804225416) do
+ActiveRecord::Schema.define(version: 20170805015958) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,5 +25,11 @@ ActiveRecord::Schema.define(version: 20170804225416) do
 
 # Could not dump table "nodes" because of following StandardError
 #   Unknown type 'ip_version_type' for column 'ip_version'
+
+  create_table "snapshots_tables", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
+    t.integer "height"
+    t.datetime "crawled_at"
+    t.integer "num_nodes"
+  end
 
 end
