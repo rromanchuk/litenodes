@@ -10,26 +10,37 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170805015958) do
+ActiveRecord::Schema.define(version: 20170807190544) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "pgcrypto"
   enable_extension "uuid-ossp"
 
-  create_table "alerts_tables", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
+  create_table "alerts", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
     t.text "email"
+    t.bigint "node_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["node_id"], name: "index_alerts_on_node_id"
   end
 
 # Could not dump table "nodes" because of following StandardError
 #   Unknown type 'ip_version_type' for column 'ip_version'
 
-  create_table "snapshots_tables", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
+  create_table "snapshots", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
     t.integer "height"
     t.datetime "crawled_at"
     t.integer "num_nodes"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "snapshots_nodes", id: false, force: :cascade do |t|
+    t.bigint "node_id"
+    t.bigint "snapshot_id"
+    t.index ["node_id"], name: "index_snapshots_nodes_on_node_id"
+    t.index ["snapshot_id"], name: "index_snapshots_nodes_on_snapshot_id"
   end
 
 end

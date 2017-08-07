@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
   resources :nodes, only: [:show, :index] do
+    resources :alerts, only: [:create]
+
     collection do
       get 'user_agents', to: 'nodes#user_agents'
       get 'countries', to: 'nodes#countries'
@@ -10,6 +12,7 @@ Rails.application.routes.draw do
 
     member do
       get 'latency', to: 'nodes#latency'
+
     end
   end
 
