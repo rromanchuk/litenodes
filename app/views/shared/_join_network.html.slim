@@ -1,0 +1,14 @@
+.row
+  .col-md-12
+    h3 JOIN THE NETWORK
+    p
+      = "Be part of the Litecoin network by running a Litecoin "
+      = link_to "full node", "https://litecoin.org/"
+    = form_tag("/nodes/join", method: "post", class: 'form-inline') do
+      .input-group
+        label.sr-only for="hostInput" Node Address
+        input.mb-2.mr-sm-2.mb-sm-0.form-control#hostInput type="text" name="host" value="#{@host_address}"
+        label.sr-only for="portInput" Node Port
+        input.form-control#portInput type="text" name="port" placeholder="9333" value="9333"
+        span.input-group-btn
+          input.btn.btn-primary type="submit" Search
