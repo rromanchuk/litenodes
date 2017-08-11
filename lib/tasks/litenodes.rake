@@ -33,7 +33,7 @@ namespace :litenodes do
         file = File.read("/home/ubuntu/bitnodes/data/export/#{msg}.json")
         nodes_arr = JSON.parse(file)
         Rails.logger.info("[listen_for_export] Found #{nodes_arr.length} nodes to update")
-        Snapshot.create!(crawled_at: Time.at(msg.to_i))
+        Snapshot.create!(crawled_at: Time.at(msg.to_i), num_nodes: nodes_arr.length, height: Node.height)
         process_node_array(nodes_arr)
       end
     end
