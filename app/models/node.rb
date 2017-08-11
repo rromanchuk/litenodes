@@ -1,6 +1,7 @@
 class Node < ApplicationRecord
   has_many :alerts
   has_and_belongs_to_many :snapshots
+
   before_create :determine_ip_version, :determine_friendly_country_name
 
   update_index('nodes#node') { self }
