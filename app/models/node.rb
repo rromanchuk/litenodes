@@ -41,7 +41,8 @@ class Node < ApplicationRecord
   end
 
   def status
-    Redis.current.hget("node:#{ip.to_s}-{port}-{from_services}", "state")
+    status = Redis.current.hget("node:#{ip.to_s}-{port}-{from_services}", "state")
+    status.nil? ? "DOWN" : status
   end
 
   def pings
