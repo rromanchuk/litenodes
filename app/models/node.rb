@@ -1,6 +1,7 @@
 class Node < ApplicationRecord
   has_many :alerts
-  has_and_belongs_to_many :snapshots
+  has_many :node_snapshots
+  has_many :snapshots, through: :node_snapshots
 
   before_create :determine_ip_version, :determine_friendly_country_name
 

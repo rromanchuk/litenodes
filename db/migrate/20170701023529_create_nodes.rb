@@ -21,5 +21,7 @@ class CreateNodes < ActiveRecord::Migration[5.1]
       t.text :address
       t.timestamps
     end
+
+
   end
 end

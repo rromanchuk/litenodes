@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170816172051) do
+ActiveRecord::Schema.define(version: 20170821233344) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,15 +25,15 @@ ActiveRecord::Schema.define(version: 20170816172051) do
     t.index ["node_id"], name: "index_alerts_on_node_id"
   end
 
+  create_table "node_snapshots", id: false, force: :cascade do |t|
+    t.uuid "node_id"
+    t.uuid "snapshot_id"
+    t.index ["node_id"], name: "index_node_snapshots_on_node_id"
+    t.index ["snapshot_id"], name: "index_node_snapshots_on_snapshot_id"
+  end
+
 # Could not dump table "nodes" because of following StandardError
 #   Unknown type 'ip_version_type' for column 'ip_version'
-
-  create_table "nodes_snapchats", id: false, force: :cascade do |t|
-    t.bigint "node_id"
-    t.bigint "snapshot_id"
-    t.index ["node_id"], name: "index_nodes_snapchats_on_node_id"
-    t.index ["snapshot_id"], name: "index_nodes_snapchats_on_snapshot_id"
-  end
 
   create_table "snapshots", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
     t.integer "height"
