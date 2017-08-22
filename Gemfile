@@ -49,9 +49,9 @@ gem 'capistrano3-puma' , group: :development
 
 gem 'dynamoid'
 gem 'aws-sdk'
+gem 'rollbar'
 
 group :production do
-  gem 'rollbar'
   gem "lograge"
   gem "rbtrace"
 end
