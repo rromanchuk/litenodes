@@ -51,6 +51,7 @@ gem 'dynamoid'
 gem 'aws-sdk'
 
 group :production do
+  gem 'rollbar'
   gem "lograge"
   gem "rbtrace"
 end
