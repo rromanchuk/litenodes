@@ -60,6 +60,8 @@ class Node < ApplicationRecord
       ip_version_str = :ipv4
     elsif ip.ipv6?
       ip_version_str = :ipv6
+    else
+      ip_version_str = :onion
     end
 
     self.ip_version = ip_version_str
