@@ -20,7 +20,7 @@ namespace :litenodes do
     file_path = Dir.glob("/home/ubuntu/bitnodes/data/export/**/*.*").sort_by { |file_name| File.stat(file_name).mtime }
     file = File.read(file_path)
     nodes_arr = JSON.parse(file)
-    process_node_array(nodes_arr)
+    node_objects = process_node_array(nodes_arr)
   end
 
   task listen_for_export: :environment do
@@ -34,21 +34,23 @@ namespace :litenodes do
         nodes_arr = JSON.parse(file)
         Rails.logger.info("[listen_for_export] Found #{nodes_arr.length} nodes to update")
         snapshot = Snapshot.create!(crawled_at: Time.at(msg.to_i), num_nodes: nodes_arr.length, height: Node.height)
-        process_node_array(nodes_arr, snapshot)
+        node_objects = process_node_array(nodes_arr)
+        Rails.logger.info "Adding #{node_objects.length} node objects to snapshot #{snapshot}"
+        snapshot.nodes = node_objects
       end
     end
   end
 
-  def process_node_array(nodes, snapshot)
+  def process_node_array(nodes)
 
-
+    node_objects = []
     nodes.each do |a|
-      Rails.logger.info "[IMPORT] address: #{a[0]}, port: #{a[1]}, version: #{a[2]}, user_agent: #{a[3]}, timestamp: #{a[4]}, services: #{a[5]}, height: #{a[6]}, hostname: #{a[7]}, city: #{a[8]}, country: #{a[9]}, latitude: #{a[10]}, longitude: #{a[11]}, timezone: #{a[12]}, asn: #{a[13]}, org: #{a[14]}"
+      Rails.logger.info "[process_node_array] address: #{a[0]}, port: #{a[1]}, version: #{a[2]}, user_agent: #{a[3]}, timestamp: #{a[4]}, services: #{a[5]}, height: #{a[6]}, hostname: #{a[7]}, city: #{a[8]}, country: #{a[9]}, latitude: #{a[10]}, longitude: #{a[11]}, timezone: #{a[12]}, asn: #{a[13]}, org: #{a[14]}"
       timestamp = Time.at(a[4])
 
       if node = Node.find_by(ip: a[0], port: a[1])
         node.update_attributes!(address: a[0], version: a[2], user_agent: a[3], timestamp: timestamp, services: a[5], height: a[6], hostname: a[7], city: a[8], country: a[9], latitude: a[10], longitude: a[11], timezone: a[12], asn: a[13], org: a[14] )
-        snapshot.nodes << node
+        node_objects << node
       else
         case a[3]
         when /Feathercoin/
@@ -59,10 +61,11 @@ namespace :litenodes do
           next
         else
           node = Node.create!(ip: a[0], address: a[0], port: a[1], version: a[2], user_agent: a[3], timestamp: timestamp, services: a[5], height: a[6], hostname: a[7], city: a[8], country: a[9], latitude: a[10], longitude: a[11], timezone: a[12], asn: a[13], org: a[14])
-          snapshot.nodes << node
+          node_objects << node
         end
       end
     end
+    node_objects
   end
 
 end
