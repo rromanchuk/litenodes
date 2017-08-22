@@ -56,12 +56,12 @@ class Node < ApplicationRecord
 
   def determine_ip_version
     ip_version_str = nil
-    if ip.ipv4?
+    if ip.nil?
+      ip_version_str = :onion
+    elsif ip.ipv4?
       ip_version_str = :ipv4
     elsif ip.ipv6?
       ip_version_str = :ipv6
-    else
-      ip_version_str = :onion
     end
 
     self.ip_version = ip_version_str
