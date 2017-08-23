@@ -26,7 +26,7 @@ namespace :litenodes do
   task listen_for_export: :environment do
     Chewy.strategy(:atomic)
 
-    client = Redis.current
+    client = Redis.new url: ENV["REDIS_URL"]
     client.subscribe("export") do |on|
       on.message do |channel, msg|
         Rails.logger.info("[listen_for_export] Broadcast on channel #{channel}: #{msg}")
