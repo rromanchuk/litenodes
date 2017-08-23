@@ -35,7 +35,7 @@ namespace :litenodes do
         Rails.logger.info("[listen_for_export] Found #{nodes_arr.length} nodes to update")
         snapshot = Snapshot.create!(crawled_at: Time.at(msg.to_i), num_nodes: nodes_arr.length, height: Node.height)
         node_objects = process_node_array(nodes_arr)
-        Rails.logger.info "Adding #{node_objects.length} node objects to snapshot #{snapshot}"
+        Rails.logger.info "Adding #{node_objects.length} node objects to snapshot #{snapshot.inspect}"
         snapshot.nodes = node_objects
       end
     end
