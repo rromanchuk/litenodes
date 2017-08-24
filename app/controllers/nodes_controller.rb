@@ -37,12 +37,13 @@ class NodesController < ApplicationController
   end
 
   def index
-    @user_agents = Node.group(:user_agent).order('count_all desc').limit(6).count
-    @countries = Node.group(:country).order('count_all desc').limit(6).count
-    @networks = Node.group(:org).order('count_all desc').limit(6).count
-    @all_nodes = Node.count
-    @ip_version_types = Node.ip_versions
-    @nodes = Node.order('timestamp desc').page params[:page]
+    @nodes = Snapshot.recent_nodes
+    @user_agents = @nodes.group(:user_agent).order('count_all desc').limit(6).count
+    @countries = @nodes.group(:country).order('count_all desc').limit(6).count
+    @networks = @nodes.group(:org).order('count_all desc').limit(6).count
+    @all_nodes = @nodes.count
+    @ip_version_types = @nodes.group(:ip_version).count
+    @nodes = @nodes.order('timestamp desc').page params[:page]
 
     respond_to do |format|
       format.html  # index.html.erb
@@ -68,7 +69,7 @@ class NodesController < ApplicationController
   end
 
   def heatmap
-    @coords = Node.all.map(&:to_geojson)
+    @coords = Snapshot.recent_nodes.map(&:to_geojson)
     respond_to do |format|
       format.html  # index.html.erb
       format.json  { render :json => @coords }
@@ -77,7 +78,7 @@ class NodesController < ApplicationController
 
 
   def coordinates
-    @nodes = Node.all
+    @nodes = Snapshot.recent_nodes
     @nodes = Node.to_geojson(@nodes)
 
     respond_to do |format|
