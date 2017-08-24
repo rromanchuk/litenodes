@@ -29,7 +29,7 @@ class Node < ApplicationRecord
 
   def self.nodes_query(q)
     {
-      multi_match: { query: q, fields: ['user_agent', 'address'] }
+      multi_match: { query: q, fields: ['user_agent', 'address', 'country_friendly_name'] }
     }
   end
 
