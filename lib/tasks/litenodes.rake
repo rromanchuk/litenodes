@@ -30,7 +30,7 @@ namespace :litenodes do
     client.subscribe("export") do |on|
       on.message do |channel, msg|
         Rails.logger.info("[listen_for_export] Broadcast on channel #{channel}: #{msg}")
-        file = File.read("/home/ubuntu/bitnodes/data/export/#{msg}.json")
+        file = File.read("/home/ubuntu/bitnodes/data/export/fbc0b6db/#{msg}.json")
         nodes_arr = JSON.parse(file)
         Rails.logger.info("[listen_for_export] Found #{nodes_arr.length} nodes to update")
         snapshot = Snapshot.create!(crawled_at: Time.at(msg.to_i), num_nodes: nodes_arr.length, height: Node.height)
