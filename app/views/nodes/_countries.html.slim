@@ -35,4 +35,6 @@
                 .col-md-4
                   small = ctr
                   - ctr += 1
-                  = link_to "#{country} (#{count})", search_path(q: country)
+                  - c_name = Country[country]&.translated_names&.first
+                  | &nbsp;
+                  = link_to "#{c_name} (#{count})", search_path(q: c_name)

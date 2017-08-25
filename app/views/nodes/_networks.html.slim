@@ -34,4 +34,5 @@
                 .col-md-4
                   small = ctr
                   - ctr += 1
+                  | &nbsp;
                   = link_to "#{org} (#{count})", search_path(q: org)
