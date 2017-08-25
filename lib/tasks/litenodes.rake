@@ -12,7 +12,10 @@ namespace :litenodes do
     path = File.expand_path("../test.json", __FILE__)
     file = File.read(path)
     nodes_arr = JSON.parse(file)
-    process_node_array(nodes_arr)
+    snapshot = Snapshot.create!(crawled_at: Time.current, num_nodes: nodes_arr.length, height: 20000)
+
+    node_objects = process_node_array(nodes_arr)
+    snapshot.nodes = node_objects
   end
 
   task process_last: :environment do

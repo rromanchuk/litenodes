@@ -11,5 +11,5 @@
         - rank += 1
         tr
           td = rank
-          td = network
+          td = network ? link_to(network, search_path(q: network)) : "Unknown"
           td = count

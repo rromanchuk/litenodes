@@ -14,8 +14,6 @@ javascript:
   }
 
 
-
-
 .row
   .col-md-4.col-lg-3
     h3
@@ -35,9 +33,19 @@ javascript:
             - c_name = Country[country]&.translated_names&.first
             td = c_name ? link_to(c_name, search_path(q: c_name)) : "Unknown"
             td = "#{count} (#{number_to_percentage((count/@all_nodes.to_f * 100), precision: 0) })"
+        tr.text-center colspan="3"
+          a href="#" More
   .col-md-8.col-lg-9
     #map
     p Map shows concentration of reachable Litecoin nodes found in countries around the world.
+.row
+  .modal
+    .modal-dialog role="document"
+      .modal-content
+        .modal-header
+          h5.modal-title Global Nodes Distribution
+          button type="button" class="close" data-dismiss="modal" aria-label="Close"
+            span aria-hidden="true" &times;
 hr
 
 = render partial: 'shared/join_network', locals: {host_address: @host_address}
