@@ -37,7 +37,8 @@ class NodesController < ApplicationController
   end
 
   def index
-    @recent_nodes = Snapshot.recent_nodes
+    @last_snapshot = Snapshot.last
+    @recent_nodes = @last_snapshot.nodes
     @user_agents = @recent_nodes.group(:user_agent).order('count_all desc').limit(6).count
     @countries = @recent_nodes.group(:country).order('count_all desc').limit(6).count
     @networks = @recent_nodes.group(:org).order('count_all desc').limit(6).count
