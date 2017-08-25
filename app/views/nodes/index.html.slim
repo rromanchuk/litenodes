@@ -18,6 +18,8 @@
     p.text-muted .onion
     h3 = Node.height
     p.text-muted height
+    - new_nodes, left_nodes = Snapshot.churn
+    h3 = "+#{new_nodes}/-#{left_nodes}"
 
   .col-md-10
     ul.nav.nav-tabs
