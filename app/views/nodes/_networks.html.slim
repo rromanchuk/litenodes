@@ -13,3 +13,6 @@
           td = rank
           td = network ? link_to(network, search_path(q: network)) : "Unknown"
           td = count
+      tr
+        td.text-center colspan="3"
+          a href="#" data-toggle="modal" data-target="#networksModal" = "More (#{@recent_nodes.group(:org).count.length})"

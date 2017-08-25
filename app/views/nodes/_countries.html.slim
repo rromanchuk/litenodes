@@ -14,3 +14,6 @@
           - c_name = Country[country]&.translated_names&.first
           td = c_name ? link_to(c_name, search_path(q: c_name)) : "Unknown"
           td = count
+      tr
+        td.text-center colspan="3"
+          a href="#" data-toggle="modal" data-target="#countriesModal" = "More (#{@recent_nodes.group(:country).count.length})"

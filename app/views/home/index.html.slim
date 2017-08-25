@@ -33,8 +33,9 @@ javascript:
             - c_name = Country[country]&.translated_names&.first
             td = c_name ? link_to(c_name, search_path(q: c_name)) : "Unknown"
             td = "#{count} (#{number_to_percentage((count/@all_nodes.to_f * 100), precision: 0) })"
-        tr.text-center colspan="3"
-          a href="#" More
+        tr
+          td.text-center colspan="3"
+            a href="#" data-toggle="modal" data-target="#countries" More
   .col-md-8.col-lg-9
     #map
     p Map shows concentration of reachable Litecoin nodes found in countries around the world.

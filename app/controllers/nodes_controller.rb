@@ -37,13 +37,13 @@ class NodesController < ApplicationController
   end
 
   def index
-    @nodes = Snapshot.recent_nodes
-    @user_agents = @nodes.group(:user_agent).order('count_all desc').limit(6).count
-    @countries = @nodes.group(:country).order('count_all desc').limit(6).count
-    @networks = @nodes.group(:org).order('count_all desc').limit(6).count
-    @all_nodes = @nodes.count
-    @ip_version_types = @nodes.group(:ip_version).count
-    @nodes = @nodes.order('timestamp desc').page params[:page]
+    @recent_nodes = Snapshot.recent_nodes
+    @user_agents = @recent_nodes.group(:user_agent).order('count_all desc').limit(6).count
+    @countries = @recent_nodes.group(:country).order('count_all desc').limit(6).count
+    @networks = @recent_nodes.group(:org).order('count_all desc').limit(6).count
+    @all_nodes = @recent_nodes.count
+    @ip_version_types = @recent_nodes.group(:ip_version).count
+    @nodes = @recent_nodes.order('timestamp desc').page params[:page]
 
     respond_to do |format|
       format.html  # index.html.erb

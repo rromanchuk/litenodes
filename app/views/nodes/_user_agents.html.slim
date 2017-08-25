@@ -13,5 +13,25 @@
           td = rank
           td = link_to agent, search_path(q: agent)
           td = count
-      tr.text-center colspan="3"
-        a href="#" More
+      tr
+        td.text-center colspan="3"
+          a href="#" data-toggle="modal" data-target="#userAgents" = "More (#{@recent_nodes.group(:user_agent).count.length})"
+
+.row
+  .modal#userAgents
+    .modal-dialog.modal-lg role="document"
+      .modal-content
+        .modal-header
+          h5.modal-title Global Nodes Distribution
+          button type="button" class="close" data-dismiss="modal" aria-label="Close"
+            span aria-hidden="true" &times;
+        .modal-body
+          .container-fluid
+            .row
+              - ctr = 1
+              - all_useragents = Snapshot.recent_nodes.group(:user_agent).order('count_all desc').count
+              - all_useragents.each do |agent, count|
+                .col-md-4
+                  small = ctr
+                  = link_to "#{agent} (#{count})", search_path(q: agent)
+
