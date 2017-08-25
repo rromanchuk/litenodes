@@ -35,5 +35,5 @@
                   small = ctr
                   | &nbsp;
                   - ctr += 1
-                  = link_to "#{agent} (#{count})", search_path(q: agent)
+                  = link_to "#{agent.gsub("/", "")} (#{count})", search_path(q: agent)
 

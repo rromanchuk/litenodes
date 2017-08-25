@@ -54,6 +54,10 @@ class Node < ApplicationRecord
     self.country_friendly_name = Country[country]&.translated_names&.first
   end
 
+  def clean_agent
+    user_agent.gsub("/", "")
+  end
+
   def determine_ip_version
     ip_version_str = nil
     if ip.nil?
