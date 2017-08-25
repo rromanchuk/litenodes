@@ -16,3 +16,22 @@
       tr
         td.text-center colspan="3"
           a href="#" data-toggle="modal" data-target="#networksModal" = "More (#{@recent_nodes.group(:org).count.length})"
+
+.row
+  .modal#networksModal
+    .modal-dialog.modal-lg role="document"
+      .modal-content
+        .modal-header
+          h5.modal-title Global Nodes Distribution
+          button type="button" class="close" data-dismiss="modal" aria-label="Close"
+            span aria-hidden="true" &times;
+        .modal-body
+          .container-fluid
+            .row
+              - ctr = 1
+              - all_useragents = @recent_nodes.group(:org).order('count_all desc').count
+              - all_useragents.each do |org, count|
+                .col-md-4
+                  small = ctr
+                  - ctr += 1
+                  = link_to "#{org} (#{count})", search_path(q: org)

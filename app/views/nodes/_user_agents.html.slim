@@ -33,5 +33,6 @@
               - all_useragents.each do |agent, count|
                 .col-md-4
                   small = ctr
+                  - ctr += 1
                   = link_to "#{agent} (#{count})", search_path(q: agent)
 
