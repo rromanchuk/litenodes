@@ -24,7 +24,7 @@
         - nodes.each do |node|
           tr
             td.d-xs-table-cell.d-sm-none
-              = link_to "#{node.ip.to_s}:#{node.port}", node_path(node)
+              = link_to "#{node.address}:#{node.port}", node_path(node)
               br
               span = node.hostname
               br
@@ -38,7 +38,7 @@
               br
               span.text-muted = node.timezone
             td.d-none.d-sm-table-cell
-              = link_to "#{node.ip.to_s}:#{node.port}", node_path(node)
+              = link_to "#{node.address}:#{node.port}", node_path(node)
               br
               = node.hostname
               br
