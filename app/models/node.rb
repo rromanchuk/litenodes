@@ -7,6 +7,8 @@ class Node < ApplicationRecord
 
   update_index('nodes#node') { self }
 
+  default_scope { order(timestamp: :desc) }
+
   def self.last_export
     Redis.current.get('last_export')
   end

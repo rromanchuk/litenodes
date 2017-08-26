@@ -2,6 +2,8 @@ class Snapshot < ApplicationRecord
   has_many :node_snapshots
   has_many :nodes, through: :node_snapshots
 
+  default_scope { order(created_at: :desc) }
+
   def self.recent_nodes
     Snapshot.last.nodes
   end
