@@ -50,6 +50,7 @@ gem 'capistrano3-puma' , group: :development
 gem 'dynamoid'
 gem 'aws-sdk'
 gem 'rollbar'
+gem 'pghero'
 
 group :production do
   gem "lograge"

@@ -20,6 +20,8 @@ Rails.application.routes.draw do
   post 'nodes/*host/port/*port', to: 'nodes#join'
   get 'search', to: 'search#search'
 
+  mount PgHero::Engine, at: "pghero"
   root to: 'home#index'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+
 end
