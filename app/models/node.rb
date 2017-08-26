@@ -1,4 +1,6 @@
 class Node < ApplicationRecord
+
+
   has_many :alerts, dependent: :destroy
   has_many :node_snapshots, dependent: :destroy
   has_many :snapshots, through: :node_snapshots
@@ -8,6 +10,7 @@ class Node < ApplicationRecord
   update_index('nodes#node') { self }
 
   #default_scope { order(timestamp: :asc) }
+  SERVICES_SCORE = {13 => 1, 1 => 0}
 
   def self.last_export
     Redis.current.get('last_export')
@@ -56,6 +59,10 @@ class Node < ApplicationRecord
     self.country_friendly_name = Country[country]&.translated_names&.first
   end
 
+  def pix
+    # PIX = ((VI + SI + HI + AI + PI + DLI + DUI + WLI + WUI + MLI + MUI + NSI + NI + BI) / 14.0) x 10.0
+  end
+
   def clean_agent
     user_agent.gsub("/", "")
   end
@@ -87,6 +94,20 @@ class Node < ApplicationRecord
         }
       ]
     }
+  end
+
+
+  # scoring
+  def pi
+    port == "9333" ? 1.0 : 0.0
+  end
+
+  def hi
+    height / Snapshot.height
+  end
+
+  def si
+    services == 13 ? 1 : 0
   end
 
 end

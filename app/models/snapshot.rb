@@ -8,6 +8,10 @@ class Snapshot < ApplicationRecord
     Snapshot.last.nodes
   end
 
+  def self.height
+    Redis.current.get('height').to_i || 0
+  end
+
   def self.churn
     latest_snap, previous_snap = Snapshot.last(2)
     new_nodes = latest_snap.nodes - previous_snap.nodes
