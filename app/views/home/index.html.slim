@@ -1,8 +1,6 @@
 javascript:
   var map;
 
-
-
   function initMap() {
 
 
@@ -63,4 +61,4 @@ hr
 
 = render partial: 'shared/join_network', locals: {host_address: @host_address}
 
-script async="async" defer="defer" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAQq4eYwVQuWM07_96G14qx2AmZBEaXDTo&callback=initMap&libraries=visualization" type="text/javascript"
+script async="async" defer="defer" src="https://maps.googleapis.com/maps/api/js?key=#{ENV["GOOGLE_MAPS_KEY"]}&callback=initMap&libraries=visualization" type="text/javascript"
