@@ -12,3 +12,16 @@
         input.form-control#portInput type="text" name="port" placeholder="9333" value="9333"
         span.input-group-btn
           input.btn.btn-primary type="submit" Search
+    p
+    p Use this tool to check if your Bitcoin client is currently accepting incoming connections from other nodes.
+    / div id="check-node-status" class="alert text-center alert-success" style="display: block;"
+    /   i class="fa fa-check-circle"
+    /   | &nbsp;
+    /   a href="/nodes/47.151.139.237-8333/" title="Node status" 47.151.139.237:8333 /Bitcoin ABC:0.14.6(EB8.0)
+    / div id="check-node-status" class="alert text-center alert-danger" style="display: block;"
+    /   i class="fa fa-exclamation-circle"
+    /   | &nbsp;
+    /   | 69.172.201.153:8333 is unreachable
+
+
+      / <div id="check-node-status" class="alert text-center" style="display: block;"><i class="fa fa-spinner fa-3x fa-spin"></i></div>
