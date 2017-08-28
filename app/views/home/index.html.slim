@@ -1,12 +1,15 @@
 javascript:
   var map;
+  var styles = [{stylers:[{saturation:-90},{lightness:20}]},{featureType:"transit",stylers:[{visibility:"off"}]},{featureType:"road",stylers:[{visibility:"simplified"}]},{featureType:"road",elementType:"labels",stylers:[{visibility:"off"}]},{featureType:"water",elementType:"geometry",stylers:[{lightness:100}]}];
 
   function initMap() {
 
 
     map = new google.maps.Map(document.getElementById('map'), {
-      center: {lat: -34.397, lng: 150.644},
-      zoom: 2
+      center: {lat: 15, lng: 10},
+      zoom: 2,
+      mapTypeId: google.maps.MapTypeId.ROADMAP,
+      styles: styles
     });
     // map.data.loadGeoJson('/nodes/coordinates.json');
   }
