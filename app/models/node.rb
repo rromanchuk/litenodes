@@ -22,7 +22,7 @@ class Node < ApplicationRecord
   end
 
   def self.search(q)
-    NodesIndex.query(nodes_query(q)).load
+    NodesIndex::Node.query(match: {user_agent: q, org: q}).load
   end
 
   def self.ip_versions
@@ -33,11 +33,12 @@ class Node < ApplicationRecord
     Redis.current.zadd("check", Time.now.to_i.to_s, [address, port, "1"].to_json)
   end
 
-  def self.nodes_query(q)
-    {
-      multi_match: { query: q, fields: ['user_agent', 'address', 'country_friendly_name', 'org'] }
-    }
-  end
+
+  # def self.nodes_query(q)
+  #   {
+  #     multi_match: { query: q, fields: ['user_agent', 'address', 'country_friendly_name', 'org'] }
+  #   }
+  # end
 
   def rtt_latency_array
     Redis.current.lrange("rtt:#{ip.to_s}-#{port}", 0, 10).map(&:to_i)
