@@ -514,9 +514,10 @@ GEM
       rack (>= 1.0.0)
       rack-test (>= 0.5.4)
       xpath (~> 2.0)
-    chewy (0.9.0)
-      activesupport (>= 3.2)
-      elasticsearch (>= 1.0.0)
+    chewy (0.10.1)
+      activesupport (>= 4.0)
+      elasticsearch (>= 2.0.0)
+      elasticsearch-dsl
     childprocess (0.7.1)
       ffi (~> 1.0, >= 1.0.11)
     coffee-rails (4.2.2)
@@ -541,6 +542,7 @@ GEM
       elasticsearch-transport (= 5.0.4)
     elasticsearch-api (5.0.4)
       multi_json
+    elasticsearch-dsl (0.1.5)
     elasticsearch-transport (5.0.4)
       faraday
       multi_json
@@ -718,7 +720,7 @@ DEPENDENCIES
   capistrano-rbenv
   capistrano3-puma
   capybara (~> 2.13)
-  chewy (= 0.9.0)
+  chewy
   coffee-rails (~> 4.2)
   countries
   dotenv-rails
