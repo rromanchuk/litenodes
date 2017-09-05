@@ -4,6 +4,7 @@ class Node < ApplicationRecord
   has_many :alerts, dependent: :destroy
   has_many :node_snapshots, dependent: :destroy
   has_many :snapshots, through: :node_snapshots
+  has_many :pings, dependent: :destroy
 
   before_create :determine_ip_version, :determine_friendly_country_name
 
