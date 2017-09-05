@@ -4,7 +4,7 @@ class SearchController < ApplicationController
     @nodes = []
     if params[:q]
       @q = sanitize_string(params[:q])
-      @nodes = Node.search(@q).page(params[:page])
+      @nodes = Node.search(@q).page(params[:page]).objects
     end
   end
 
