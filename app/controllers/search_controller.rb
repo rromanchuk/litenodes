@@ -1,8 +1,11 @@
 class SearchController < ApplicationController
 
   def search
-    @q = sanitize_string(params[:q])
-    @nodes = Node.search(@q).page(params[:page])
+    @nodes = []
+    if params[:q]
+      @q = sanitize_string(params[:q])
+      @nodes = Node.search(@q).page(params[:page])
+    end
   end
 
   def sanitize_string(str)
