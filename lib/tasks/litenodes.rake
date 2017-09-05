@@ -7,7 +7,7 @@ NODE_XTHIN = 1 << 4
 
 namespace :litenodes do
   desc "TODO"
-  task process_nodes: :environment do
+  task process_nodes_test: :environment do
     Chewy.strategy(:atomic)
     path = File.expand_path("../test.json", __FILE__)
     file = File.read(path)
@@ -18,6 +18,7 @@ namespace :litenodes do
     snapshot.nodes = node_objects
   end
 
+  desc "Process the last known export dump"
   task process_last: :environment do
     Chewy.strategy(:atomic)
     file_path = Dir.glob("/home/ubuntu/bitnodes/data/export/**/*.*").sort_by { |file_name| File.stat(file_name).mtime }
@@ -26,6 +27,7 @@ namespace :litenodes do
     node_objects = process_node_array(nodes_arr)
   end
 
+  desc "Listen for redis pub/sub channel when a new crawl json dump is complete and ready for import."
   task listen_for_export: :environment do
     Chewy.strategy(:atomic)
 
@@ -48,7 +50,7 @@ namespace :litenodes do
 
     node_objects = []
     nodes.each do |a|
-      Rails.logger.info "[process_node_array] address: #{a[0]}, port: #{a[1]}, version: #{a[2]}, user_agent: #{a[3]}, timestamp: #{a[4]}, services: #{a[5]}, height: #{a[6]}, hostname: #{a[7]}, city: #{a[8]}, country: #{a[9]}, latitude: #{a[10]}, longitude: #{a[11]}, timezone: #{a[12]}, asn: #{a[13]}, org: #{a[14]}"
+      #Rails.logger.info "[process_node_array] address: #{a[0]}, port: #{a[1]}, version: #{a[2]}, user_agent: #{a[3]}, timestamp: #{a[4]}, services: #{a[5]}, height: #{a[6]}, hostname: #{a[7]}, city: #{a[8]}, country: #{a[9]}, latitude: #{a[10]}, longitude: #{a[11]}, timezone: #{a[12]}, asn: #{a[13]}, org: #{a[14]}"
       timestamp = Time.at(a[4])
 
       begin
