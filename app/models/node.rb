@@ -22,7 +22,8 @@ class Node < ApplicationRecord
   end
 
   def self.search(q)
-    NodesIndex::Node.query(match: {user_agent: q}).query(match: {org: q}).load.objects
+    #NodesIndex::Node.query(match: {user_agent: q}).query(match: {org: q}).load.objects
+    NodesIndex::Node.query(multi_match: {query: q, fields: ['user_agent', 'org', 'country_friendly_name', 'address', 'org']}).load
   end
 
   def self.ip_versions
