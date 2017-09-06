@@ -4,5 +4,6 @@ class NodesIndex < Chewy::Index
     field :user_agent
     field :org
     field :country_friendly_name
+    field :timestamp, 'datetime'
   end
 end
