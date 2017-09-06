@@ -4,7 +4,7 @@ class SearchController < ApplicationController
     @nodes = []
     if params[:q]
       @q = sanitize_string(params[:q])
-      @nodes = Node.search(@q).order(:timestamp).page(params[:page]).objects
+      @nodes = Node.search(@q).order(timestamp: {order: :desc}).page(params[:page]).objects
     end
   end
 
