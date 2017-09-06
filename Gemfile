@@ -51,6 +51,9 @@ gem 'aws-sdk'
 gem 'rollbar'
 gem 'pghero'
 
+gem 'bitcoin-ruby', git: 'https://github.com/rromanchuk/bitcoin-ruby', branch: 'master', require: 'bitcoin'
+
+
 group :production do
   gem "lograge"
   gem "rbtrace"

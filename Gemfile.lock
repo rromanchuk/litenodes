@@ -1,4 +1,11 @@
 GIT
+  remote: https://github.com/rromanchuk/bitcoin-ruby
+  revision: 443157f9d96e94de05244d5b27abfc32e67cbba4
+  branch: master
+  specs:
+    bitcoin-ruby (0.0.11)
+
+GIT
   remote: https://github.com/twbs/bootstrap-rubygem
   revision: b12fdcd48c26cee905c3365626247f452fb941f2
   branch: master
@@ -714,6 +721,7 @@ PLATFORMS
 
 DEPENDENCIES
   aws-sdk
+  bitcoin-ruby!
   bootstrap!
   byebug
   capistrano-rails
