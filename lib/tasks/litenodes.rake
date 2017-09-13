@@ -27,6 +27,16 @@ namespace :litenodes do
     node_objects = process_node_array(nodes_arr)
   end
 
+  task :listen_for_rtt: :environment do
+    Chewy.strategy(:atomic)
+    client = Redis.new url: ENV["REDIS_URL"]
+
+    client.subscribe("rtt") do |on|
+      on.message do |channel, msg|
+
+      end
+  end
+
   desc "Listen for redis pub/sub channel when a new crawl json dump is complete and ready for import."
   task listen_for_export: :environment do
     Chewy.strategy(:atomic)

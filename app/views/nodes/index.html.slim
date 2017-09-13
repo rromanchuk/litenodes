@@ -5,7 +5,7 @@
     p
       | Snapshot of reachable nodes as of
       | &nbsp;
-      span = @last_snapshot.created_at
+      span = time_ago_in_words(@last_snapshot.created_at) + " ago."
 
 .row
   .big.col-md-2.text-center
