@@ -35,6 +35,7 @@ namespace :litenodes do
       on.message do |channel, msg|
 
       end
+    end
   end
 
   desc "Listen for redis pub/sub channel when a new crawl json dump is complete and ready for import."
