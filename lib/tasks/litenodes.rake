@@ -27,7 +27,7 @@ namespace :litenodes do
     node_objects = process_node_array(nodes_arr)
   end
 
-  task :listen_for_rtt: :environment do
+  task listen_for_rtt: :environment do
     Chewy.strategy(:atomic)
     client = Redis.new url: ENV["REDIS_URL"]
 
