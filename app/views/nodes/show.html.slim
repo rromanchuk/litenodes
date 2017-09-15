@@ -22,56 +22,57 @@ javascript:
   });
 
 
-.row
-  .col-md-12
-    h3 Node status
-    p
-      | Node information is updated every 5 minutes. Last updated on
-      | &nbsp;
-      span.timestamp = @node.timestamp
-.row
-  .col-md-3
-  .col-md-6
-    br
-    ul.list-group.big.text-center
-      li.list-group-item
-        h3 = "#{@node.address}:#{@node.port}"
-        small = @node.hostname
-      li.list-group-item
-        .chart.annotated-chart
-          #latency-chart
-      li.list-group-item
-        h4 = @node.status
-        small.field.timestamp = @node.timestamp
-        h4 = @node.average_latency
-        small.field Average latency
-      li.list-group-item
-        h4 = @node.user_agent
-        small.field User agent
-        h4 = @node.version
-        small.field Protocol version
-        h4 = "#{services_string(@node.services)} (#{@node.services})"
-        small.field Services
-        h4 = "#{@node.height} #{height_percentage(@node)}"
-        small.field Height
-      li.list-group-item
-        h4 = Country[@node.country]&.name
-        small.field Location
-        h4 = @node.timezone
-        small.field Timezone
-        h4 = @node.org
-        small.field Network
-        h4 = @node.asn
-        small.field ASN
-hr
-.row
- .col-md-12
-  h3
-    a href="#alerts" Alerts
-  p Add your contact information to receive an alert when this node becomes unreachable. An alert is triggered only if its status has remained unchanged for 3 consecutive snapshots. All contact information will be kept private and used strictly for sending out alerts related to this node.
-  = form_tag("/nodes/#{@node.id}/alerts", method: "post", class: 'form-inline') do
-    .input-group
-      label.sr-only for="emailInput" Email
-      input.mb-2.mr-sm-2.mb-sm-0.form-control#hostInput type="text" name="email" placeholder="Email address"
-      span.input-group-btn
-        input.btn.btn-primary type="submit" Search
+- cache @node do
+  .row
+    .col-md-12
+      h3 Node status
+      p
+        | Node information is updated every 5 minutes. Last updated on
+        | &nbsp;
+        span.timestamp = @node.timestamp
+  .row
+    .col-md-3
+    .col-md-6
+      br
+      ul.list-group.big.text-center
+        li.list-group-item
+          h3 = "#{@node.address}:#{@node.port}"
+          small = @node.hostname
+        li.list-group-item
+          .chart.annotated-chart
+            #latency-chart
+        li.list-group-item
+          h4 = @node.status
+          small.field.timestamp = @node.timestamp
+          h4 = @node.average_latency
+          small.field Average latency
+        li.list-group-item
+          h4 = @node.user_agent
+          small.field User agent
+          h4 = @node.version
+          small.field Protocol version
+          h4 = "#{services_string(@node.services)} (#{@node.services})"
+          small.field Services
+          h4 = "#{@node.height} #{height_percentage(@node)}"
+          small.field Height
+        li.list-group-item
+          h4 = Country[@node.country]&.name
+          small.field Location
+          h4 = @node.timezone
+          small.field Timezone
+          h4 = @node.org
+          small.field Network
+          h4 = @node.asn
+          small.field ASN
+  hr
+  .row
+   .col-md-12
+    h3
+      a href="#alerts" Alerts
+    p Add your contact information to receive an alert when this node becomes unreachable. An alert is triggered only if its status has remained unchanged for 3 consecutive snapshots. All contact information will be kept private and used strictly for sending out alerts related to this node.
+    = form_tag("/nodes/#{@node.id}/alerts", method: "post", class: 'form-inline') do
+      .input-group
+        label.sr-only for="emailInput" Email
+        input.mb-2.mr-sm-2.mb-sm-0.form-control#hostInput type="text" name="email" placeholder="Email address"
+        span.input-group-btn
+          input.btn.btn-primary type="submit" Search
