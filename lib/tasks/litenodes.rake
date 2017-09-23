@@ -27,16 +27,30 @@ namespace :litenodes do
     node_objects = process_node_array(nodes_arr)
   end
 
-  task listen_for_rtt: :environment do
+
+  task process_pings: :environment do
     Chewy.strategy(:atomic)
     client = Redis.new url: ENV["REDIS_URL"]
+    client.scan_each(match: 'ping:*').each do |key|
+      puts "key: #{key}"
+      next if key.include? "ping:cidr"
+      address, port = key.gsub('ping:', '').split("-")
+      port, nonce = port.split(":")
 
-    client.subscribe("rtt") do |on|
-      on.message do |channel, msg|
-
+      puts "address: #{address}, port: #{port}, nonce: #{nonce}"
+      node = Node.where(address: address, port: port).first
+      next if node.nil?
+      puts "node: #{node.inspect}"
+      timestamps = client.lrange key, 0, 1
+      if timestamps.length > 1
+        rtt = timestamps[1].to_i - timestamps[0].to_i
+        puts "rtt: #{rtt}, timestamps: #{timestamps}"
+        ping = Ping.create!(node: node, rtt: rtt, created_at: Time.at(timestamps[0].to_i), nonce: nonce)
       end
+
     end
   end
+
 
   desc "Listen for redis pub/sub channel when a new crawl json dump is complete and ready for import."
   task listen_for_export: :environment do
