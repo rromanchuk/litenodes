@@ -17,7 +17,10 @@ html
         .col-md-12
           h1
             a.logo href="/" Litenodes
-          p Litenodes is currently being developed to estimate the size of the Litecoin network by finding all the reachable nodes in the network.
+          p
+            | Litenodes is currently being developed to estimate the size of the Litecoin network by finding all the reachable nodes in the network. Please help keeping this crawler running by donating
+            | &nbsp;
+            = link_to "LPeZXsb9UwLyeH6fjqz1xsk3cbtPTXGkDD", "https://insight.litenodes.net/insight/address/LPeZXsb9UwLyeH6fjqz1xsk3cbtPTXGkDD"
       hr
 
       = yield
@@ -31,7 +34,7 @@ html
               | &nbsp;
               = link_to "Ryan Romanchuk", "https://github.com/rromanchuk"
               | &nbsp;
-              = link_to "LPeZXsb9UwLyeH6fjqz1xsk3cbtPTXGkDD", "https://live.blockcypher.com/ltc/address/LPeZXsb9UwLyeH6fjqz1xsk3cbtPTXGkDD/"
+              = link_to "LPeZXsb9UwLyeH6fjqz1xsk3cbtPTXGkDD", "https://insight.litenodes.net/insight/address/LPeZXsb9UwLyeH6fjqz1xsk3cbtPTXGkDD"
 
             h3 About Litenodes
             p
@@ -47,7 +50,12 @@ html
               a href="//github.com/ayeowch/bitnodes" target="_blank" GitHub (ayeowch/bitnodes)
             p
               | The crawler maintained by Litenodes connects from these IP addresses:
-              code 34.231.133.189, 2600:1f18:24e9:4b00:12a9:17b9:9ad5:494d
+              code 34.231.133.189, 2600:1f18:24e9:4b03:85dc:8d3a:6ee:3dbe
+            p
+              a href="https://insight.litenodes.net" Block explorer
+              span.delimiter ·
+              a href="https://insight.litenodes.net/insight/address/LPeZXsb9UwLyeH6fjqz1xsk3cbtPTXGkDD" Please Donate
+
     javascript:
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
