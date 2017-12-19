@@ -10,7 +10,7 @@ class Node < ApplicationRecord
 
   update_index('nodes#node') { self }
 
-  #default_scope { order(timestamp: :asc) }
+  PINGS_LIMIT = 50
   SERVICES_SCORE = {13 => 1, 1 => 0}
 
   def self.last_export
@@ -22,7 +22,6 @@ class Node < ApplicationRecord
   end
 
   def self.search(q)
-    #NodesIndex::Node.query(match: {user_agent: q}).query(match: {org: q}).load.objects
     NodesIndex::Node.query(multi_match: {query: q, fields: ['user_agent', 'org', 'country_friendly_name', 'address', 'org']}).load
   end
 
@@ -33,13 +32,6 @@ class Node < ApplicationRecord
   def self.add_node(address, port)
     Redis.current.zadd("check", Time.now.to_i.to_s, [address, port, "1"].to_json)
   end
-
-
-  # def self.nodes_query(q)
-  #   {
-  #     multi_match: { query: q, fields: ['user_agent', 'address', 'country_friendly_name', 'org'] }
-  #   }
-  # end
 
   def rtt_latency_array
     Redis.current.lrange("rtt:#{ip.to_s}-#{port}", 0, 10).map(&:to_i)
@@ -60,10 +52,6 @@ class Node < ApplicationRecord
 
   def determine_friendly_country_name
     self.country_friendly_name = Country[country]&.translated_names&.first
-  end
-
-  def pix
-    # PIX = ((VI + SI + HI + AI + PI + DLI + DUI + WLI + WUI + MLI + MUI + NSI + NI + BI) / 14.0) x 10.0
   end
 
   def clean_agent
@@ -99,8 +87,16 @@ class Node < ApplicationRecord
     }
   end
 
+  def trim_pings
+    fresh_ids = pings.limit(PINGS_LIMIT).pluck(:id)
+    pings.where.not(id: fresh_ids).destroy_all
+  end
 
   # scoring
+  def pix
+    # PIX = ((VI + SI + HI + AI + PI + DLI + DUI + WLI + WUI + MLI + MUI + NSI + NI + BI) / 14.0) x 10.0
+  end
+
   def pi
     port == "9333" ? 1.0 : 0.0
   end
