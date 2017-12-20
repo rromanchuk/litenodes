@@ -27,12 +27,24 @@ namespace :litenodes do
     node_objects = process_node_array(nodes_arr)
   end
 
+  task process_all: :environment do
+    Dir.glob("/home/ubuntu/bitnodes/data/export/**/*.*").sort_by { |file_name| File.stat(file_name).mtime }.each do |file_name|
+      Rails.logger.info "Processing #{file_name}"
+      file = File.read(file_path)
+      nodes_arr = JSON.parse(file)
+      snapshot = Snapshot.find_or_create_by!(crawled_at: Time.at(msg.to_i), num_nodes: nodes_arr.length)
+      node_objects = process_node_array(nodes_arr)
+      Rails.logger.info "Adding #{node_objects.length} node objects to snapshot #{snapshot.inspect}"
+      snapshot.nodes = node_objects
+      File.delete(file)
+    end
+  end
+
 
   task process_pings: :environment do
     Chewy.strategy(:atomic)
     client = Redis.new url: ENV["REDIS_URL"]
     client.scan_each(match: 'ping:*').each do |key|
-      puts "key: #{key}"
       next if key.include? "ping:cidr"
       address, port = key.gsub('ping:', '').split("-")
       port, nonce = port.split(":")
@@ -44,7 +56,7 @@ namespace :litenodes do
       timestamps = client.lrange key, 0, 1
       if timestamps.length > 1
         rtt = timestamps[1].to_i - timestamps[0].to_i
-        puts "rtt: #{rtt}, timestamps: #{timestamps}"
+        Rails.logger.info "address: #{address}:#{port}, rtt: #{rtt}, timestamps: #{timestamps}"
         ping = Ping.create!(node: node, rtt: rtt, created_at: Time.at(timestamps[0].to_i), nonce: nonce)
       end
 
@@ -85,7 +97,9 @@ namespace :litenodes do
       end
 
       if node = Node.find_by(address: a[0], port: a[1])
-        node.update_attributes!(ip: inet, address: a[0], version: a[2], user_agent: a[3], timestamp: timestamp, services: a[5], height: a[6], hostname: a[7], city: a[8], country: a[9], latitude: a[10], longitude: a[11], timezone: a[12], asn: a[13], org: a[14] )
+        node.update_attributes!(ip: inet, address: a[0], version: a[2], user_agent: a[3], services: a[5], height: a[6], hostname: a[7], city: a[8], country: a[9], latitude: a[10], longitude: a[11], timezone: a[12], asn: a[13], org: a[14] )
+        node.timestamp = node.timestamp < timestamp ? timestamp : node.timestamp
+        node.save!
         node_objects << node
       else
         case a[3]
