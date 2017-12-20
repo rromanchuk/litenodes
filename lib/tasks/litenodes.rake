@@ -6,37 +6,18 @@ NODE_WITNESS = 1 << 3
 NODE_XTHIN = 1 << 4
 
 namespace :litenodes do
-  desc "TODO"
-  task process_nodes_test: :environment do
-    Chewy.strategy(:atomic)
-    path = File.expand_path("../test.json", __FILE__)
-    file = File.read(path)
-    nodes_arr = JSON.parse(file)
-    snapshot = Snapshot.create!(crawled_at: Time.current, num_nodes: nodes_arr.length, height: 20000)
-
-    node_objects = process_node_array(nodes_arr)
-    snapshot.nodes = node_objects
-  end
-
-  desc "Process the last known export dump"
-  task process_last: :environment do
-    Chewy.strategy(:atomic)
-    file_path = Dir.glob("/home/ubuntu/bitnodes/data/export/**/*.*").sort_by { |file_name| File.stat(file_name).mtime }
-    file = File.read(file_path)
-    nodes_arr = JSON.parse(file)
-    node_objects = process_node_array(nodes_arr)
-  end
-
   task process_all: :environment do
-    Dir.glob("/home/ubuntu/bitnodes/data/export/**/*.*").sort_by { |file_name| File.stat(file_name).mtime }.each do |file_name|
-      Rails.logger.info "Processing #{file_name}"
+    Dir.glob("/home/ubuntu/bitnodes/data/export/fbc0b6db/*.json").sort_by { |file_path| File.stat(file_path).mtime }.each do |file_path|
+      Chewy.strategy(:atomic)
+      Rails.logger.info "Processing #{file_path}"
+      msg = file_name.split(".")[0]
       file = File.read(file_path)
       nodes_arr = JSON.parse(file)
       snapshot = Snapshot.find_or_create_by!(crawled_at: Time.at(msg.to_i), num_nodes: nodes_arr.length)
       node_objects = process_node_array(nodes_arr)
       Rails.logger.info "Adding #{node_objects.length} node objects to snapshot #{snapshot.inspect}"
       snapshot.nodes = node_objects
-      File.delete(file)
+      File.delete(file_path)
     end
   end
 
@@ -104,13 +85,10 @@ namespace :litenodes do
       else
         case a[3]
         when /Feathercoin/
-          Rails.logger.info "Skipping for user_agent #{a[3]}"
           next
         when /Digitalcoin/
-          Rails.logger.info "Skipping for user_agent #{a[3]}"
           next
         when /Reddcoin/
-          Rails.logger.info "Skipping for user_agent #{a[3]}"
           next
         when /Worldcoin/,/Awcoin/,/Node/,/DrVenkman/
            next
