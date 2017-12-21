@@ -10,7 +10,7 @@ namespace :litenodes do
     Dir.glob("/home/ubuntu/bitnodes/data/export/fbc0b6db/*.json").sort_by { |file_path| File.stat(file_path).mtime }.each do |file_path|
       Chewy.strategy(:atomic)
       Rails.logger.info "Processing #{file_path}"
-      msg = file_name.split(".")[0]
+      msg = file_path.split(".")[0]
       file = File.read(file_path)
       nodes_arr = JSON.parse(file)
       snapshot = Snapshot.find_or_create_by!(crawled_at: Time.at(msg.to_i), num_nodes: nodes_arr.length)
