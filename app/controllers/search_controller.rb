@@ -4,8 +4,7 @@ class SearchController < ApplicationController
     @nodes = []
     if params[:q]
       @q = sanitize_string(params[:q])
-      ids = Node.search(@q).objects.map(&:id)
-      @nodes = Snapshot.last.nodes.where(id: ids).page(params[:page])
+      @nodes = Node.search(@q).page(params[:page]).objects
     end
   end
 

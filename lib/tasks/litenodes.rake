@@ -30,10 +30,10 @@ namespace :litenodes do
       address, port = key.gsub('ping:', '').split("-")
       port, nonce = port.split(":")
 
-      puts "address: #{address}, port: #{port}, nonce: #{nonce}"
+      Rails.logger.info "address: #{address}, port: #{port}, nonce: #{nonce}"
       node = Node.where(address: address, port: port).first
       next if node.nil?
-      puts "node: #{node.inspect}"
+      Rails.logger.info "node: #{node.inspect}"
       timestamps = client.lrange key, 0, 1
       if timestamps.length > 1
         rtt = timestamps[1].to_i - timestamps[0].to_i

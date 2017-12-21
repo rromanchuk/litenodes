@@ -14,11 +14,11 @@ class Node < ApplicationRecord
   SERVICES_SCORE = {13 => 1, 1 => 0}
 
   def self.last_export
-    Redis.current.get('last_export')
+    Redis.export.get('last_export')
   end
 
   def self.height
-    Redis.current.get('height').to_i || 0
+    Redis.crawl.get('height').to_i || 0
   end
 
   def self.search(q)
@@ -30,11 +30,11 @@ class Node < ApplicationRecord
   end
 
   def self.add_node(address, port)
-    Redis.current.zadd("check", Time.now.to_i.to_s, [address, port, "1"].to_json)
+    Redis.crawl.zadd("check", Time.now.to_i.to_s, [address, port, "1"].to_json)
   end
 
   def rtt_latency_array
-    Redis.current.lrange("rtt:#{ip.to_s}-#{port}", 0, 10).map(&:to_i)
+    Redis.pcap.lrange("rtt:#{ip.to_s}-#{port}", 0, 10).map(&:to_i)
   end
 
   def average_latency
@@ -42,12 +42,7 @@ class Node < ApplicationRecord
   end
 
   def status
-    status = Redis.current.hget("node:#{address}-#{port}-#{services}", "state")
-    status.nil? ? "DOWN" : status
-  end
-
-  def pings
-    Redis.current.lrange("ping:#{ip.to_s}-{port}", 0, -1)
+    Snapshot.last.nodes.find_by(address: address, port: port).nil? ? "DOWN" : "UP"
   end
 
   def determine_friendly_country_name
