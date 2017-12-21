@@ -14,11 +14,11 @@ class Node < ApplicationRecord
   SERVICES_SCORE = {13 => 1, 1 => 0}
 
   def self.last_export
-    Redis.export.get('last_export')
+    RedisClients.export.get('last_export')
   end
 
   def self.height
-    Redis.crawl.get('height').to_i || 0
+    RedisClients.crawl.get('height').to_i || 0
   end
 
   def self.search(q)
@@ -30,11 +30,11 @@ class Node < ApplicationRecord
   end
 
   def self.add_node(address, port)
-    Redis.crawl.zadd("check", Time.now.to_i.to_s, [address, port, "1"].to_json)
+    RedisClients.crawl.zadd("check", Time.now.to_i.to_s, [address, port, "1"].to_json)
   end
 
   def rtt_latency_array
-    Redis.pcap.lrange("rtt:#{ip.to_s}-#{port}", 0, 10).map(&:to_i)
+    RedisClients.pcap.lrange("rtt:#{ip.to_s}-#{port}", 0, 10).map(&:to_i)
   end
 
   def average_latency
