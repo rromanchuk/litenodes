@@ -1,7 +1,7 @@
 class RedisClients
 
   def self.crawl
-    @crawl ||= Redis.new url: ENV["REDIS_CRAWL"])
+    @crawl ||= Redis.new url: ENV["REDIS_CRAWL"]
   end
 
   def self.ping
