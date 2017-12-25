@@ -7,7 +7,7 @@ NODE_XTHIN = 1 << 4
 
 namespace :litenodes do
   task process_all: :environment do
-    Dir.glob("/home/ubuntu/bitnodes/data/export/fbc0b6db/*.json").sort_by { |file_path| File.stat(file_path).mtime }.each do |file_path|
+    Dir.glob("/home/ubuntu/bitnodes/data/rails_export/fbc0b6db/*.json").sort_by { |file_path| File.stat(file_path).mtime }.each do |file_path|
       Chewy.strategy(:atomic)
       msg = file_path.split(".")[0]
       file = File.read(file_path)
@@ -16,7 +16,7 @@ namespace :litenodes do
       Rails.logger.info "Processing Export: #{msg}.json, Nodes: #{nodes_arr.length}, snapshot: #{snapshot.id}"
       node_objects = process_node_array(nodes_arr)
       snapshot.nodes = node_objects
-      #File.delete(file_path)
+      File.delete(file_path)
     end
   end
 
