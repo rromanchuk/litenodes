@@ -13,8 +13,20 @@ class Node < ApplicationRecord
   PINGS_LIMIT = 50
   SERVICES_SCORE = {13 => 1, 1 => 0}
 
+  def self.up
+    Redis.current.smembers('up')
+  end
+
+  def self.reachable
+    Redis.current.smembers('reachable')
+  end
+
   def self.last_export
     Redis.current.get('last_export')
+  end
+
+  def self.pending
+    Redis.current.get('pending')
   end
 
   def self.height
