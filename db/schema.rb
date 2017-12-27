@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170918181314) do
+ActiveRecord::Schema.define(version: 20171227024804) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,6 +23,21 @@ ActiveRecord::Schema.define(version: 20170918181314) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["node_id"], name: "index_alerts_on_node_id"
+  end
+
+  create_table "mempool", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
+    t.text "txid"
+    t.integer "size"
+    t.integer "fee"
+    t.integer "modifiedfee"
+    t.datetime "time"
+    t.integer "height"
+    t.integer "descendantcount"
+    t.integer "descendantsize"
+    t.integer "descendantfees"
+    t.integer "ancestorcount"
+    t.integer "ancestorsize"
+    t.integer "ancestorfees"
   end
 
   create_table "node_snapshots", force: :cascade do |t|

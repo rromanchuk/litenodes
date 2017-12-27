@@ -11,6 +11,7 @@ gem 'dotenv-rails', require: 'dotenv/rails-now'
 gem 'rails', '~> 5.1.2'
 gem "pg"
 gem 'redis'
+gem 'httparty'
 
 gem 'whenever'
 gem 'sidekiq'

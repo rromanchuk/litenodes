@@ -659,6 +659,8 @@ GEM
     ffi (1.9.18)
     globalid (0.4.1)
       activesupport (>= 4.2.0)
+    httparty (0.15.6)
+      multi_xml (>= 0.5.2)
     i18n (0.9.1)
       concurrent-ruby (~> 1.0)
     i18n_data (0.8.0)
@@ -704,6 +706,7 @@ GEM
       i18n (>= 0.6.4, < 1.0)
     msgpack (1.2.0)
     multi_json (1.12.2)
+    multi_xml (0.6.0)
     multipart-post (2.0.0)
     net-scp (1.2.1)
       net-ssh (>= 2.6.5)
@@ -839,6 +842,7 @@ DEPENDENCIES
   coffee-rails (~> 4.2)
   countries
   dotenv-rails
+  httparty
   jbuilder (~> 2.5)
   jquery-rails
   kaminari
